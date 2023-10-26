@@ -1,0 +1,6 @@
+[submodule "lakeroad"]
+	path = lakeroad
+	url = ./lakeroad/
+[submodule "lakeroad-yosys"]
+	path = lakeroad-yosys
+	url = ./lakeroad-yosys/
