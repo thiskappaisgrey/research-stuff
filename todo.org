@@ -1,11 +1,4 @@
-* Inbox
-** TODO http://csg.csail.mit.edu/6.S983/recs/formal_recitation/#verifying-the-tiny-cpu - try to follow along with this tutorial
-** TODO Try to create a simple CPU pipeline and formally verify each part (or just fake it)
-** TODO Try to figure out how to use egglog (or something similar) to synthesize based on verified results.
-*** use results of each part as an "input" to the egglog synthesis program
-** DONE Add racket to the nix flake
-CLOSED: [2023-09-18 Mon 13:20]
-* idea scratch
-- think of synthesis as a nix-derivation
-- essentially - you have a "target" with some dependencies
-- compile/cache certain dependencies along the way - tries to make things faster..?
+* Inbox for hardware decomp
+** TODO Work on building fork of yosys to convert to egglog
+** TODO Write some sample definitions to add as lib components(=half-adder=)
+** TODO Try running the rewrites on unoptimized BTOR output on a bigger component
