@@ -1,3 +1,0 @@
-# read design
-read_verilog half-adder.v
-write_lakeroad half-adder.egg

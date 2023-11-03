@@ -1,0 +1,89 @@
+(include "common/lakeroad_rewrites.egg")
+(include "half-adder/half-adder.egg")
+;; Definition of "HalfAdd" based on Henry's work
+;; the goal is to be able to derive any definition automatically
+;; "a" and "b" are considered equal
+;; and you are looking for wires that are copied through the And and Xor gate
+;; (rule ((= (And a b) c) (= (Xor a b) sum))
+;;       ((let name (+ rcadder-name "ha_" (to-str (i64-gen))))
+;;        (set (i64-gen) -1)
+;;        (set (ripple-carry name) (HalfAdd a b))))
+(let base-name "ha_")
+(function i64-gen () i64 :merge (+ old 1))
+(set (i64-gen) 0)
+
+(function ripple-carry (String) Expr :cost 100000)
+(ruleset myrewrites)
+
+;; TODO - I just wrote Henry's rule in this - i.e. replicated his result.
+;; TODO I need some kind of scoping that egglog doesn't have..?
+
+;; but I need to ... somehow ... use the synthesized egg to make this rule rather than making it manually
+;; I also have doubts that it would work for things that are beyond 1 layer..?
+;; Also, can I programmatically add rules..? 
+(rule ((= (Op2 (And) a b) carry)
+       (= (Op2 (Xor) a b) sum))
+      (
+       (let name base-name)
+       (union (half-adds name) (Sketch2 (HalfAdd) a b)))
+      
+     :ruleset myrewrites)
+; wire declarations
+; $flatten\half_adder1.$and$half_adder.v:17$3_Y
+(let v0 (Wire "v0" 1))
+; $flatten\half_adder1.$xor$half_adder.v:16$2_Y
+(let v1 (Wire "v1" 1))
+; $flatten\half_adder2.$and$half_adder.v:17$3_Y
+(let v2 (Wire "v2" 1))
+; $flatten\half_adder2.$xor$half_adder.v:16$2_Y
+(let v3 (Wire "v3" 1))
+; $or$full_adder.v:34$1_Y
+(let v4 (Wire "v4" 1))
+; i_bit1
+(let v5 (Wire "v5" 1))
+; i_bit2
+(let v6 (Wire "v6" 1))
+; i_cin
+(let v7 (Wire "v7" 1))
+
+; cells
+(union v0 (Op2 (And) v5 v6))
+(union v1 (Op2 (Xor) v5 v6))
+(union v2 (Op2 (And) v7 v1))
+(union v3 (Op2 (Xor) v7 v1))
+(union v4 (Op2 (Or) v0 v2))
+
+; inputs
+(let i_bit1 (Var "i_bit1" 1))
+(union v5 i_bit1)
+(let i_bit2 (Var "i_bit2" 1))
+(union v6 i_bit2)
+(let i_cin (Var "i_cin" 1))
+(union v7 i_cin)
+
+; outputs
+(let o_carry v4)
+(let o_sum v3)
+(run-schedule
+ (repeat 100
+         (saturate typing)))
+; delete wire expressions
+(delete (Wire "v0" 1))
+(delete (Wire "v1" 1))
+(delete (Wire "v2" 1))
+(delete (Wire "v3" 1))
+(delete (Wire "v4" 1))
+(delete (Wire "v5" 1))
+(delete (Wire "v6" 1))
+(delete (Wire "v7" 1))
+
+(run-schedule
+ (repeat 100
+         ;; (saturate sketch-proposal)
+         (saturate myrewrites)))
+(extract o_carry)
+(extract o_sum)
+
+;; TODO how would I detect the full/half adder though..?
+;; You can't because of the tensor (wires run in parallel)
+(query-extract (HasType o_sum (Bitvector 1)))
