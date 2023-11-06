@@ -13,8 +13,6 @@
           (Mux))
 
                                         ; TODO Sketch Ops
-(datatype SketchOp
-          (HalfAdd))
 
                                         ; Our language. Note that we do not explicitly use IDs as in the Lakeroad paper
                                         ; formalization. The IDs are still there, though: they're the 
@@ -43,14 +41,8 @@
           (ZeroExtend Expr i64)
           
                                         ; (Sketch sketch-id input-expr...)
-                                        ; A sketch node. This is a proposal for a potential expression, that will
-                                        ; need to be solved for/made concrete later on.
-                                        ; TODO I need to remove this and maybe add
           
-          (Sketch1 SketchOp Expr)
-          (Sketch2 SketchOp Expr Expr)
-          (Sketch3 SketchOp Expr Expr Expr)
-          (Sketch4 SketchOp Expr Expr Expr Expr)
+          (Module String Expr) ; This is a module, the Expr can just be 1 ouput or concats
           )
 
 ;;; Types for Lakeroad expressions.

@@ -1,3 +1,4 @@
+;; TODO remove this and just add it to the Rust src..
 (include "egglog_src/lakeroad_rewrites.egg")
 
 ; wire declarations
