@@ -1,6 +1,3 @@
-;; TODO remove this and just add it to the Rust src..
-(include "egglog_src/lakeroad_rewrites.egg")
-
 ; wire declarations
 ; $and$half-adder.v:17$2_Y
 (let v0 (Wire "v0" 1))
@@ -13,7 +10,7 @@
 
 ; cells
 (union v0 (Op2 (And) v3 v2))
-(union v1 (Op2 (Xor) v2 (Op2 (Xor) v3 v2)))
+(union v1 (Op2 (Xor) v3 v2))
 
 ; inputs
 (let i_bit2 (Var "i_bit2" 1))
@@ -34,12 +31,12 @@
 (delete (Wire "v3" 1))
 
 ;; Don't need to run typing again.
-(run-schedule
- (repeat 100
-         (saturate typing)
-         (saturate misc)
-         ))
-
-(extract o_sum)
-(extract o_carry)
+;; (run-schedule
+;;  (repeat 100
+;;          (saturate typing)
+;;          (saturate misc)
+;;          ))
+;;
+;; (extract o_sum)
+;; (extract o_carry)
 ;; (query-extract (HasType o_sum (Bitvector 1)))

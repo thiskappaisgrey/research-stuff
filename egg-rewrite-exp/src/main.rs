@@ -1,16 +1,21 @@
-// TODO need to figure out 
-use log::{info, trace, warn};
-use env_logger::Env;
-use egglog::{
-    ast::{parse::ExprParser, Expr, Symbol},
-    ArcSort,
-    ExtractReport::*,
-    ast::Expr::*,
-    TermDag, Value, EGraph,
-};
-use clap::Parser;
-use std::{path::Path, collections::HashMap, process::exit, fmt::Write};
+// TODO need to figure out
 use anyhow::Result;
+use clap::Parser;
+use egglog::{
+    ast::Expr::*,
+    ast::{parse::ExprParser, Expr, Symbol},
+    ArcSort, EGraph,
+    ExtractReport::*,
+    TermDag, Value,
+};
+use env_logger::Env;
+use log::{info, trace, warn};
+use std::{
+    collections::{HashMap, HashSet},
+    fmt::Write,
+    path::Path,
+    process::exit,
+};
 
 /// Extract the value of an output wire (or any expression) from an EGraph
 fn extract_value(egraph: &egglog::EGraph, value: &Value, sort: &ArcSort) -> Expr {
@@ -41,17 +46,13 @@ fn get_input_wires(e: &Expr) -> HashMap<Expr, Expr> {
                     }
                 }
             }
-            _  => {
-                ()
-            }
+            _ => (),
         }
 
         out.into_iter().flatten().collect()
     });
     v.into_iter().collect()
-
 }
-
 
 /// replace the values using a replacement map
 fn replace_in_expr(expr: &Expr, replacement_map: &HashMap<Expr, Expr>) -> Expr {
@@ -73,27 +74,16 @@ fn match_symbol(sym: &Symbol, re: &str) -> Result<bool> {
 // Instead - get a vec of expressions + their names then
 // generate a rewrite..?
 /// inputs should be the values of get_input_wires
-/// outputs should be the output wire name and their associated expression 
-fn build_rewrite(name: &str, inputs: &Vec<Expr>, outputs: &Vec<(String, Expr)>) -> String  {
-    let ins: Vec<_> = inputs.iter().map(|p| {
-        match *p {
-            Var(sym) => {
-                sym.as_str()
-            }
-            _ => {
-                ""
-            }
-        }
-    }).collect();
-
-    // for each expression - get the names of the vars..?
-
+/// outputs should be the output wire name and their associated expression
+fn build_rewrite(name: &str, inputs: &Vec<String>, outputs: &Vec<(String, Expr)>) -> String {
     // map -> join the name / output with newline..?
     let name_lower = name.to_lowercase();
     let mut lhs = String::new();
     let mut rhs = String::new();
+
+    // TODO I might use different syntax here..
     write!(&mut rhs, "(let {name_lower} (Module \"{name}\" (Concat ").unwrap();
-    for i in ins {
+    for i in inputs {
         write!(&mut rhs, "{i} ").unwrap();
     }
     write!(&mut rhs, ")))\n").unwrap();
@@ -104,20 +94,27 @@ fn build_rewrite(name: &str, inputs: &Vec<Expr>, outputs: &Vec<(String, Expr)>) 
         writeln!(&mut rhs, "(union {name} (Extract {i1} {i} {name_lower}))").unwrap();
     }
     let template = format!("(rule \n(\n{lhs}) \n({rhs}) :ruleset rewrites)");
-
     // TODO need to get all of the variables in the expression
     // Each of those vars need to go in the extract
 
-    
     template.into()
 }
 
+fn to_svg(e: &EGraph, path: &str) {
+    let serialized = e.serialize_for_graphviz(true);
+    let svg_path = Path::new(&path).with_extension("svg");
+    let path_str = svg_path.to_str().unwrap();
+    println!("Print svg to: {path_str}");
+    serialized.to_svg_file(svg_path).unwrap();
+}
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
+    /// The library definition you want to find
     lib_filename: String,
-    mod_filename: Option<String>
+    /// The module where you are looking
+    mod_filename: Option<String>,
 }
 
 fn main() {
@@ -129,78 +126,138 @@ fn main() {
         .init();
     let args = Args::parse();
 
+    let rewrite_lib = include_str!("../egglog_src/lakeroad_rewrites.egg");
+    let optimize_lib = include_str!("../egglog_src/optimize.egg");
+
     // 1. load file into egglog
     // 2. try to generate rewrites based on it
     // 3. do the rewrite or something
 
     let mut std_mod_egraph = egglog::EGraph::default();
+
+    // this is the egg_src rewrite lib
+    std_mod_egraph.parse_and_run_program(rewrite_lib).unwrap();
+    std_mod_egraph.parse_and_run_program(optimize_lib).unwrap();
+
     let st = std::fs::read_to_string(Path::new(&args.lib_filename)).unwrap();
     // Need to traverse the AST for all of the output variables..?
-    
-    // println!("{st}");
-    // TODO this is an unwrap
+
     match std_mod_egraph.parse_and_run_program(&st) {
         Ok(_msgs) => {
-            // for msg in msgs {
-            //     println!("{msg}");
-            // }
-            println!("Ran egglog succeed!");
-        },
+            println!("Ran egglog to generate the rewrite succeed!");
+        }
         Err(err) => {
             println!("{err}");
             exit(1);
         }
     };
 
+    // let optimize_rule = if optimize { "(saturate optimize)" } else { "" };
+    let rule = format!("(run-schedule (repeat 100  (saturate )))");
+
+    match std_mod_egraph.parse_and_run_program(&rule) {
+        Ok(msgs) => {
+            println!("Run schedule succeed");
+            for msg in msgs {
+                println!("{msg}");
+            }
+        }
+        Err(err) => {
+            println!("Run schedule failed: {err}");
+            exit(1);
+        }
+    }
+    // This is the SVG stuff
+    to_svg(&std_mod_egraph, &args.lib_filename);
+
+    //  ---- REWRITE STUFF ----
     // Here, we have to clone because the hashmap references will be invalidated
     // when I mutate it by evaling an expression
-    let output_wires: Vec<_> = std_mod_egraph.global_bindings.keys().filter(|p| {
-        match_symbol(p, "o_").unwrap()
-    }).cloned().collect();
+    let output_wires: Vec<_> = std_mod_egraph
+        .global_bindings
+        .keys()
+        .filter(|p| match_symbol(p, "o_").unwrap())
+        .cloned()
+        .collect();
 
     // maybe here, I build up a string that can go on the right hand side..?
     // need to figure out the left hand side first anyways..
+    let mut i_wires: HashSet<String> = HashSet::new();
+    let out_map: Vec<(String, Expr)> = output_wires
+        .into_iter()
+        .map(|wire| {
+            let (sort, value) = std_mod_egraph
+                .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
+                .unwrap();
 
+            let expr = extract_value(&std_mod_egraph, &value, &sort);
+            let inputs = get_input_wires(&expr);
+            let rep_expr = replace_in_expr(&expr, &inputs);
+            inputs.values().for_each(|input| {
+                i_wires.insert(input.to_string());
+            });
+            (wire.to_string(), rep_expr.clone())
+        })
+        .collect();
 
-    for wire in output_wires {
-        let (sort, value) = std_mod_egraph
-            .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
-            .unwrap();
-
-        let expr = extract_value(&std_mod_egraph, &value, &sort);
-        println!("Original expression for {wire}: {expr}");
-        let inputs = get_input_wires(&expr);
-        let rep_expr = replace_in_expr(&expr, &inputs);
-        println!("Replaced expression for {wire}: {rep_expr}");
-    }
-
-    
-
+    let rewrite = build_rewrite("HalfAdd", &i_wires.into_iter().collect(), &out_map);
+    println!("{rewrite}");
+    // --- end of REWRITE stuff ---
 
     // "mod_filename" is the file name of the module to find half_adders
     if let Some(name) = args.mod_filename {
+        println!("Match on: {name}");
         // 1. build up a new egraph
         let mut rewrite_mod_egraph = EGraph::default();
-        let st = std::fs::read_to_string(Path::new(&args.lib_filename)).unwrap();
-        println!("Running on Rewrite Module");
+
+        rewrite_mod_egraph
+            .parse_and_run_program(rewrite_lib)
+            .unwrap();
+
+        let st = std::fs::read_to_string(Path::new(&name)).unwrap();
+
+        // rewrite_mod_egraph.parse_and_run_program(&rewrite).unwrap();
         match rewrite_mod_egraph.parse_and_run_program(&st) {
             Ok(_msgs) => {
-                // for msg in msgs {
-                //     println!("{msg}");
-                // }
                 println!("Ran egglog on rewrite_mod succeed!");
-            },
+            }
             Err(err) => {
-                println!("{err}");
+                println!("Error {err}");
+                exit(1);
             }
         };
+        // println!("Rewrite is: {rewrite}");
+        // TODO: Don't want to run rewrite
+        // TODO: Make the typing into flags +
+        // I want to be able to run _detructive_ optimizations and see
+        // if egglog can "undo" those optimizations - but I need to figure out
+        // what they are..
+        let typing = false;
+        let rewrite = false;
+        let optimize = false;
+        let rewrite_rule = if rewrite { "(saturate rewrites)" } else { "" };
+        let typing_rule = if typing { "(saturate typing)" } else { "" };
+        let optimize_rule = if optimize { "(saturate optimize)" } else { "" };
 
-        // 2. search for half_adders or any other value in that egraph
-        // 3. rewrite them into half_adder modules
-        // 4. (maybe?) go back into verilog somehow..?
-        
+        let rule =
+            format!("(run-schedule (repeat 100  {typing_rule}  {optimize_rule} {rewrite_rule}))");
+        match rewrite_mod_egraph.parse_and_run_program(&rule) {
+            Ok(msgs) => {
+                println!("Run schedule succeed");
+                for msg in msgs {
+                    println!("{msg}");
+                }
+            }
+            Err(err) => {
+                println!("Run schedule failed: {err}");
+                exit(1);
+            }
+        }
+        println!("Ran schedule");
 
-
+        let serialized = rewrite_mod_egraph.serialize_for_graphviz(true);
+        let svg_path = Path::new(&name).with_extension("svg");
+        serialized.to_svg_file(svg_path).unwrap();
     }
     // Actually - instead of using an egglog style rewrite rule..
     // Can I just directly, in the rust code, do the search for half_adders..?
@@ -217,15 +274,22 @@ mod test {
         // TODO the lhs need to be more sophisticated..
         let name = "HalfAdd";
         let exprs: Vec<(String, Expr)> = vec![
-            ("o_sum".into(), ExprParser::new().parse("(Op2 (And) i_sum i_carry)").unwrap()),
-            ("o_carry".into(), ExprParser::new().parse("(Op2 (Xor) i_sum i_carry)").unwrap()),
+            (
+                "o_sum".into(),
+                ExprParser::new()
+                    .parse("(Op2 (And) i_sum i_carry)")
+                    .unwrap(),
+            ),
+            (
+                "o_carry".into(),
+                ExprParser::new()
+                    .parse("(Op2 (Xor) i_sum i_carry)")
+                    .unwrap(),
+            ),
         ];
-        let ins: Vec<Expr> = vec![
-            ExprParser::new().parse("i_sum").unwrap(),
-            ExprParser::new().parse("i_carry").unwrap()
-        ];
-        let rule = build_rewrite(name, &ins,  &exprs);
-        println!("Rule: {rule}");
+        let ins: Vec<String> = vec!["i_sum".into(), "i_carray".into()];
+        build_rewrite(name, &ins, &exprs);
+
         // assert false so it prints
         // assert!(false);
     }

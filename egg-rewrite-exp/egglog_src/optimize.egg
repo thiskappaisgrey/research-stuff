@@ -1,0 +1,83 @@
+;; Assume lang has been ran - in the rust code
+;; xor-conv
+;; (rewrite (Xor a b) (And (Or a b) (Not (And a b))))
+(ruleset optimize)
+(rewrite (Op2 (Xor) a b)
+	(Op2 (And) (Op2 (Or) a b) (Op1 (Not) (Op2 (And) a b)))
+	 :ruleset optimize)
+
+;; TODO: Ideally, I would just do an extract..? 
+;; but I need to extract for each output or something..?
+;; I want to extract out and get rid of the other nodes
+;; to simulate optimization..
+(ruleset optimize-del)
+(rule (= (Op2 (Xor) a b)
+	 )
+	((union 
+	   (Op2 (Xor) a b)
+	   (Op2 (And) (Op2 (Or) a b) (Op1 (Not) (Op2 (And) a b)))))
+	 :ruleset optimize-del)
+
+;; (ruleset sat-rewrite-rules)
+;; ; comm-and
+;; (rewrite (And a b) (And b a))
+;; ; assoc-and
+;; (rewrite (And (And a b) c) (And a (And b c)))
+;; ; comm-or
+;; (rewrite (Or a b) (Or b a))
+;; ; assoc-or
+;; (rewrite (Or (Or a b) c) (Or a (Or b c)))
+;; ; comm-xor
+;; (rewrite (Xor a b) (Xor b a))
+;; ; assoc-xor
+;; (rewrite (Xor (Xor a b) c) (Xor a (Xor b c)))
+;; ; double-neg
+;; (rewrite (Not (Not a)) a)
+;; ; or-true
+;; (rewrite (Or a (Not a)) (Wire True))
+;; ; and-false
+;; (rewrite (And a (Not a)) (Wire False))
+;; ; and-identity
+;; (rewrite (And a (Wire True)) a)
+;; ; or-identity
+;; (rewrite (Or a (Wire False)) a)
+;; ; or-kill
+;; (rewrite (Or a (Wire True)) (Wire True))
+;; ; and-kill
+;; (rewrite (And a (Wire False)) (Wire False))
+;; ; and-idem
+;; (rewrite (And a a) a)
+;; ; or-idem
+;; (rewrite (Or a a) a)
+;; ; absorb1
+;; (rewrite (Or a (And a b)) a)
+;; ; absorb2
+;; (rewrite (And a (Or a b)) a)
+;; ; absorb3
+;; (rewrite (And a (Or (Not a) b)) (And a b))
+;; ; absorb4
+;; (rewrite (Or a (And (Not a) b)) (Or a b))
+;; ; xor-neg-id
+;; (rewrite (Xor a (Wire True)) (Not a))
+;; ; xor-identity
+;; (rewrite (Xor a (Wire False)) a)
+;; ; xor-idem
+;; (rewrite (Xor a a) (Wire False))
+;; ; TRUE/FALSE
+;; (rewrite (Wire False) (Const 0 1))
+;; (rewrite (Wire True) (Const 1 1))
+;; ; xor-conv
+;; (rewrite (Xor a b) (And (Or a b) (Not (And a b))))
+;; ; xor-conv2
+;; (rewrite (Xor a b) (Or (And (Not a) b) (And a (Not b))))
+;; ; xor-and-comm
+;; (rewrite (Or (And a b) (And c (Xor a b))) (Or (And a c) (And b (Xor a c))))
+;; ; demorgan
+;; (birewrite (Or (Not a) (Not b)) (Not (And a b)))
+;; ; demorgan2
+;; (birewrite (And (Not a) (Not b)) (Not (Or a b)))
+;; ; dist-and-or
+;; (rewrite (Or (And a b) (And a c)) (And a (Or b c)))
+;; ; dist-or-and
+;; (rewrite (And (Or a b) (Or a c)) (Or a (And b c)))
+;; ;

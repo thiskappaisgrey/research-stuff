@@ -8,7 +8,7 @@
           (Shr)
                                         ; Returns a bitvector of width 1.
           (Eq)
-          (LogicNot)
+          (Not)
                                         ; (Mux select-expr expr expr)
           (Mux))
 
@@ -176,3 +176,9 @@
    (Extract hi lo (Concat e1 e0))
    (Extract hi lo e0)))
  :ruleset misc)
+
+(ruleset rewrites)
+
+;; TODO: Add optimizations
+
+

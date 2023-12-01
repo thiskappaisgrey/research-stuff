@@ -3,11 +3,11 @@
     "lakeroad-yosys": {
       "flake": false,
       "locked": {
-        "lastModified": 1696722664,
-        "narHash": "sha256-sO2TbB4xMoVzJuIYZzB/uHMsABYjE0ZQRH89KLzsDvg=",
+        "lastModified": 1700450098,
+        "narHash": "sha256-nh7m+7Y+Fkku0pR53ho/qDJAxa3sGzslHgPXJCBOGIY=",
         "owner": "uwsampl",
         "repo": "yosys",
-        "rev": "316e2bdcb8b2f227342af162a6d09c9b63a65ad4",
+        "rev": "c6fa24e2b2785f304f82c3d6f3625c000b9c9269",
         "type": "github"
       },
       "original": {
@@ -19,11 +19,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1694422566,
-        "narHash": "sha256-lHJ+A9esOz9vln/3CJG23FV6Wd2OoOFbDeEs4cMGMqc=",
+        "lastModified": 1700390070,
+        "narHash": "sha256-de9KYi8rSJpqvBfNwscWdalIJXPo8NjdIZcEJum1mH0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3a2786eea085f040a66ecde1bc3ddc7099f6dbeb",
+        "rev": "e4ad989506ec7d71f7302cc3067abd82730a4beb",
         "type": "github"
       },
       "original": {

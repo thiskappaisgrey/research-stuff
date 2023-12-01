@@ -1,45 +1,3 @@
-(include "egglog_src/lakeroad_rewrites.egg")
-
-;; (function ripple-carry (String) Expr :cost 100000)
-(ruleset rewrites)
-
- (rule
-(
-(= (Op2 (And) i_sum i_carry) o_sum)
-(= (Op2 (Xor) i_sum i_carry) o_carry)
-)
-((let halfadd (Module "HalfAdd" (Concat i_sum i_carry )))
-(union o_sum (Extract 1 0 halfadd))
-(union o_carry (Extract 2 1 halfadd))
-) :ruleset rewrites)
-;; (rule ((= (Op2 (And) a b) carry) ; o_carry
-;;        (= (Op2 (Xor) a b) sum)) ; o_sum
-;;       (
-;;        ; when it finds this in the egraph, I can just do whatver
-;;        ; here, I just add them to a function but maybe in the Rust code I can splice the definition out..?
-
-;;        ; union half-adder with concat XOR + AND
-;;        ; add another union - union the AND with extract from concat
-;;        ; union 
-;;        ;; (union (half-adds name) (Sketch2 (HalfAdd) a b))
-
-;;        ;; TODO instead of unioning - I think it's better for the half_add to be bound to concat
-;;        (let half_add (Module "HalfAdd" (Concat a b)))
-;;        ;; (union half_add  carry)
-;;        ;; (union half_add  sum)
-;;        (union carry (Extract 1 0 half_add))
-;;        (union sum (Extract 2 1 half_add))
-       
-;;        ;; what happens when I delete here?
-;;        ;; TODO - the concat doesn't contain what the wires going in are..?
-;;        ;; so when I delete, the inputs are not connected properly
-;;        ;; I don't have to delete, but the delete models the extraction
-;;        (delete (Op2 (And) a b))
-;;        (delete (Op2 (Xor) a b))
-       
-;;        )
-;;       :ruleset myrewrites)
-      
 ; wire declarations
 ; $flatten\half_adder1.$and$half_adder.v:17$3_Y
 (let v0 (Wire "v0" 1))
@@ -76,9 +34,7 @@
 ; outputs
 (let o_carry v4)
 (let o_sum v3)
-;; (run-schedule
-;;  (repeat 100
-;;          (saturate typing)))
+; Maybe you an can just use a rewrite to delete the wire expressions instead..?
 ; delete wire expressions
 (delete (Wire "v0" 1))
 (delete (Wire "v1" 1))
@@ -89,12 +45,3 @@
 (delete (Wire "v6" 1))
 (delete (Wire "v7" 1))
 
-(run-schedule
- (repeat 100
-         (saturate rewrites)
-         ))
-(delete (Xor))
-(delete (And))
-;; TODO how would I detect the full/half adder though..?
-;; You can't because of the tensor (wires run in parallel)
-;; (query-extract (HasType o_sum (Bitvector 1)))
