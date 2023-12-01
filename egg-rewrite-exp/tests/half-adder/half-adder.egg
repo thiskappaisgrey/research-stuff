@@ -19,8 +19,8 @@
 (union v3 i_bit1)
 
 ; outputs
-(let o_carry v0)
-(let o_sum v1)
+(let o_carry (Out v0))
+(let o_sum (Out v1))
 ;; 
 
 

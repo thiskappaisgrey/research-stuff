@@ -152,8 +152,7 @@ fn main() {
         }
     };
 
-    // let optimize_rule = if optimize { "(saturate optimize)" } else { "" };
-    let rule = format!("(run-schedule (repeat 100  (saturate )))");
+    let rule = format!("(run-schedule (repeat 100  (saturate optimizedel)))");
 
     match std_mod_egraph.parse_and_run_program(&rule) {
         Ok(msgs) => {
@@ -167,8 +166,16 @@ fn main() {
             exit(1);
         }
     }
+    // let r = std_mod_egraph
+    //     .parse_and_run_program("(extract o_sum)")
+    //     .unwrap();
+    // // Print out the extracts
+    // for msg in r {
+    //     println!("Extract: {msg}");
+    // }
     // This is the SVG stuff
     to_svg(&std_mod_egraph, &args.lib_filename);
+    // The question is can I export this to somewhere else..?
 
     //  ---- REWRITE STUFF ----
     // Here, we have to clone because the hashmap references will be invalidated
@@ -186,6 +193,7 @@ fn main() {
     let out_map: Vec<(String, Expr)> = output_wires
         .into_iter()
         .map(|wire| {
+            println!("Extracting {wire}");
             let (sort, value) = std_mod_egraph
                 .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
                 .unwrap();

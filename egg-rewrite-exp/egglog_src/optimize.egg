@@ -6,17 +6,27 @@
 	(Op2 (And) (Op2 (Or) a b) (Op1 (Not) (Op2 (And) a b)))
 	 :ruleset optimize)
 
-;; TODO: Ideally, I would just do an extract..? 
-;; but I need to extract for each output or something..?
-;; I want to extract out and get rid of the other nodes
-;; to simulate optimization..
-(ruleset optimize-del)
-(rule (= (Op2 (Xor) a b)
-	 )
+(ruleset optimizedel)
+
+;; TODO: Figure out why deletion doesn't work here
+;; Egglog encourages you not to delete - but keep the equalities
+;; But in order to "apply" the optimizations destructively(and correctly),
+;; I want to delete certain expressions to get a new, equivalent, egraph, 
+;; and I want to see if a non-deletion version of the rule cna "undo"
+;; the deletion
+(rule ((Op2 (Xor) a b))
 	((union 
 	   (Op2 (Xor) a b)
-	   (Op2 (And) (Op2 (Or) a b) (Op1 (Not) (Op2 (And) a b)))))
-	 :ruleset optimize-del)
+	   (Op2 (And) (Op2 (Or) a b) (Op1 (Not)
+					  ;; The plain union might be WRONG here
+					  ;; because of  the hash-cons
+					  ;; (Op2 (And) a b) already exists
+					  ;; so it's output is reused..?
+					  (Op2 (And) a b))))
+	(delete (Op2 (Xor) a b))
+	(delete (Xor))
+	 )
+	 :ruleset optimizedel)
 
 ;; (ruleset sat-rewrite-rules)
 ;; ; comm-and

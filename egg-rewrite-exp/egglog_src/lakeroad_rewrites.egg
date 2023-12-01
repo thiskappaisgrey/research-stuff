@@ -22,10 +22,13 @@
           (BV i64 i64)
                                         ; (Var name bitwidth)
           (Var String i64)
-                                        ; (OpN op input-expr...)
-          (Op1 Op Expr :cost 100000000)
-          (Op2 Op Expr Expr :cost 100000000)
-          (Op3 Op Expr Expr Expr :cost 100000000)
+                     
+	  ; (OpN op input-expr...)
+	  ;; TODO: Not sure why cost is set to really high for this
+	  ;; but I'll unset it..
+          (Op1 Op Expr)
+          (Op2 Op Expr Expr)
+          (Op3 Op Expr Expr Expr)
                                         ; (Reg default-value clock-expr d-expr)
           (Reg i64 Expr Expr)
                                         ; (Wire name bitwidth)
@@ -43,6 +46,7 @@
                                         ; (Sketch sketch-id input-expr...)
           
           (Module String Expr) ; This is a module, the Expr can just be 1 ouput or concats
+	  (Out Expr) ; mark an expression as an output
           )
 
 ;;; Types for Lakeroad expressions.

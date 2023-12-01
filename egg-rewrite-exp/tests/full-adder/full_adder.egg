@@ -32,8 +32,8 @@
 (union v7 i_cin)
 
 ; outputs
-(let o_carry v4)
-(let o_sum v3)
+(let o_carry (Out v4))
+(let o_sum (Out v3))
 ; Maybe you an can just use a rewrite to delete the wire expressions instead..?
 ; delete wire expressions
 (delete (Wire "v0" 1))

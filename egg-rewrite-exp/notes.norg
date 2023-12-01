@@ -1,0 +1,10 @@
+* Notes: 
+  - The way that something looks in the egraph doesn't actually mean anything when it comes to outputs.. You actually need to extract out the vars.
+  - in terms of language design, I want to be able to visually see where the module boundaries are - what it's inputs are - and what's it's outputs are.
+  - I can see the inputs as variables - but I can't see the outputs..?
+
+* List of TODO
+** ( ) Figure out how to do optimizations by extracting out 1 representation and removing others
+   - I.e. I can't delete the XOR when I try to "remove" them from the egraph
+   - I'd like to be able to extract stuff from verilog once - and get other representations for free
+** ( ) 
