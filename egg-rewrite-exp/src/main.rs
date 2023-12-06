@@ -69,12 +69,9 @@ fn match_symbol(sym: &Symbol, re: &str) -> Result<bool> {
     let re_i = regex::Regex::new(re)?;
     Ok(re_i.is_match(&sym.to_string()))
 }
-// TODO build the righthand side of a rewrite rule!
-// Need to traverse the AST and grab all of the output wires..?
-// Instead - get a vec of expressions + their names then
-// generate a rewrite..?
-/// inputs should be the values of get_input_wires
-/// outputs should be the output wire name and their associated expression
+
+// FIXME: Rewrite this rule to match the new lakeroad lang -
+// We can extract stuff from "apply"s
 fn build_rewrite(name: &str, inputs: &Vec<String>, outputs: &Vec<(String, Expr)>) -> String {
     // map -> join the name / output with newline..?
     let name_lower = name.to_lowercase();
@@ -126,8 +123,8 @@ fn main() {
         .init();
     let args = Args::parse();
 
-    let rewrite_lib = include_str!("../egglog_src/lakeroad_rewrites.egg");
-    let optimize_lib = include_str!("../egglog_src/optimize.egg");
+    let rewrite_lib = include_str!("../egglog_src/lakeroad.egg");
+    // let optimize_lib = include_str!("../egglog_src/optimize.egg");
 
     // 1. load file into egglog
     // 2. try to generate rewrites based on it
@@ -137,7 +134,7 @@ fn main() {
 
     // this is the egg_src rewrite lib
     std_mod_egraph.parse_and_run_program(rewrite_lib).unwrap();
-    std_mod_egraph.parse_and_run_program(optimize_lib).unwrap();
+    // std_mod_egraph.parse_and_run_program(optimize_lib).unwrap();
 
     let st = std::fs::read_to_string(Path::new(&args.lib_filename)).unwrap();
     // Need to traverse the AST for all of the output variables..?
@@ -152,20 +149,21 @@ fn main() {
         }
     };
 
-    let rule = format!("(run-schedule (repeat 100  (saturate optimizedel)))");
-
-    match std_mod_egraph.parse_and_run_program(&rule) {
-        Ok(msgs) => {
-            println!("Run schedule succeed");
-            for msg in msgs {
-                println!("{msg}");
-            }
-        }
-        Err(err) => {
-            println!("Run schedule failed: {err}");
-            exit(1);
-        }
-    }
+    // FIXME: Need to be able to replicate the bug with optimizedel
+    // let rule = format!("(run-schedule (repeat 100  (saturate optimizedel)))");
+    //
+    // match std_mod_egraph.parse_and_run_program(&rule) {
+    //     Ok(msgs) => {
+    //         println!("Run schedule succeed");
+    //         for msg in msgs {
+    //             println!("{msg}");
+    //         }
+    //     }
+    //     Err(err) => {
+    //         println!("Run schedule failed: {err}");
+    //         exit(1);
+    //     }
+    // }
     // let r = std_mod_egraph
     //     .parse_and_run_program("(extract o_sum)")
     //     .unwrap();
@@ -180,36 +178,37 @@ fn main() {
     //  ---- REWRITE STUFF ----
     // Here, we have to clone because the hashmap references will be invalidated
     // when I mutate it by evaling an expression
-    let output_wires: Vec<_> = std_mod_egraph
-        .global_bindings
-        .keys()
-        .filter(|p| match_symbol(p, "o_").unwrap())
-        .cloned()
-        .collect();
+    // let output_wires: Vec<_> = std_mod_egraph
+    //     .global_bindings
+    //     .keys()
+    //     .filter(|p| match_symbol(p, "o_").unwrap())
+    //     .cloned()
+    //     .collect();
 
     // maybe here, I build up a string that can go on the right hand side..?
     // need to figure out the left hand side first anyways..
-    let mut i_wires: HashSet<String> = HashSet::new();
-    let out_map: Vec<(String, Expr)> = output_wires
-        .into_iter()
-        .map(|wire| {
-            println!("Extracting {wire}");
-            let (sort, value) = std_mod_egraph
-                .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
-                .unwrap();
+    // let mut i_wires: HashSet<String> = HashSet::new();
+    // let out_map: Vec<(String, Expr)> = output_wires
+    //     .into_iter()
+    //     .map(|wire| {
+    //         println!("Extracting {wire}");
+    //         let (sort, value) = std_mod_egraph
+    //             .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
+    //             .unwrap();
+    //
+    //         let expr = extract_value(&std_mod_egraph, &value, &sort);
+    //         let inputs = get_input_wires(&expr);
+    //         let rep_expr = replace_in_expr(&expr, &inputs);
+    //         inputs.values().for_each(|input| {
+    //             i_wires.insert(input.to_string());
+    //         });
+    //         (wire.to_string(), rep_expr.clone())
+    //     })
+    //     .collect();
 
-            let expr = extract_value(&std_mod_egraph, &value, &sort);
-            let inputs = get_input_wires(&expr);
-            let rep_expr = replace_in_expr(&expr, &inputs);
-            inputs.values().for_each(|input| {
-                i_wires.insert(input.to_string());
-            });
-            (wire.to_string(), rep_expr.clone())
-        })
-        .collect();
-
-    let rewrite = build_rewrite("HalfAdd", &i_wires.into_iter().collect(), &out_map);
-    println!("{rewrite}");
+    // FIXME: There's a new language definition
+    // let rewrite = build_rewrite("HalfAdd", &i_wires.into_iter().collect(), &out_map);
+    // println!("{rewrite}");
     // --- end of REWRITE stuff ---
 
     // "mod_filename" is the file name of the module to find half_adders

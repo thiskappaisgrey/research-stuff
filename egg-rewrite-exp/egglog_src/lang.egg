@@ -1,0 +1,45 @@
+;; TODO: Language stuff - need to support the same syntax as
+;; Lakeroad - but I want to support different stuff
+(sort IVec (Vec i64))
+
+;; Support Vectors of expressions
+;; vectors can potentailly support "unions" and 
+(sort Expr)
+(sort ExprVec (Vec Expr))
+(datatype Op
+  (And)
+  (Or)
+  (Xor)
+  (Shr)
+  ; Returns a bitvector of width 1.
+  (Eq)
+  ; Bitwise not.
+  (Not)
+  (LogicNot)
+  ; (Mux select-expr expr expr)
+  (Mux)
+  
+  ; (Op1 (Extract high low) expr)
+  ; Extraction from a bitvector.
+  (Extract i64 i64)
+
+  ; (Op2 (Concat) top-expr bottom-expr)
+  ; Concatenation of two bitvectors.
+  (Concat)
+  
+  ; (Op2 (Reg init-value) clock-expr data-expr)
+  (Reg i64)
+
+  ; (Op0 (BV value bitwidth))
+  (BV i64 i64)
+
+  ; (Op1 (ZeroExtend bitwidth) expr)
+  (ZeroExtend i64)
+  )
+  (function Var (String i64) Expr)
+  (function Op0 (Op) Expr)
+  (function Op1 (Op Expr) Expr)
+  (function Op2 (Op Expr Expr) Expr)
+  (function Op3 (Op Expr Expr Expr) Expr)
+  (function Wire (String i64) Expr)
+  ;; (function apply (Module ExprVec) Expr)
