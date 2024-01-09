@@ -123,7 +123,7 @@ fn main() {
         .init();
     let args = Args::parse();
 
-    let rewrite_lib = include_str!("../egglog_src/lakeroad.egg");
+    let rewrite_lib = include_str!("../egglog_src/lakeroad_rewrites.egg");
     // let optimize_lib = include_str!("../egglog_src/optimize.egg");
 
     // 1. load file into egglog
@@ -178,37 +178,36 @@ fn main() {
     //  ---- REWRITE STUFF ----
     // Here, we have to clone because the hashmap references will be invalidated
     // when I mutate it by evaling an expression
-    // let output_wires: Vec<_> = std_mod_egraph
-    //     .global_bindings
-    //     .keys()
-    //     .filter(|p| match_symbol(p, "o_").unwrap())
-    //     .cloned()
-    //     .collect();
+    let output_wires: Vec<_> = std_mod_egraph
+        .global_bindings
+        .keys()
+        .filter(|p| match_symbol(p, "o_").unwrap())
+        .cloned()
+        .collect();
 
     // maybe here, I build up a string that can go on the right hand side..?
     // need to figure out the left hand side first anyways..
-    // let mut i_wires: HashSet<String> = HashSet::new();
-    // let out_map: Vec<(String, Expr)> = output_wires
-    //     .into_iter()
-    //     .map(|wire| {
-    //         println!("Extracting {wire}");
-    //         let (sort, value) = std_mod_egraph
-    //             .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
-    //             .unwrap();
-    //
-    //         let expr = extract_value(&std_mod_egraph, &value, &sort);
-    //         let inputs = get_input_wires(&expr);
-    //         let rep_expr = replace_in_expr(&expr, &inputs);
-    //         inputs.values().for_each(|input| {
-    //             i_wires.insert(input.to_string());
-    //         });
-    //         (wire.to_string(), rep_expr.clone())
-    //     })
-    //     .collect();
+    let mut i_wires: HashSet<String> = HashSet::new();
+    let out_map: Vec<(String, Expr)> = output_wires
+        .into_iter()
+        .map(|wire| {
+            println!("Extracting {wire}");
+            let (sort, value) = std_mod_egraph
+                .eval_expr(&egglog::ast::Expr::Var(wire.into()), None, true)
+                .unwrap();
 
-    // FIXME: There's a new language definition
-    // let rewrite = build_rewrite("HalfAdd", &i_wires.into_iter().collect(), &out_map);
-    // println!("{rewrite}");
+            let expr = extract_value(&std_mod_egraph, &value, &sort);
+            let inputs = get_input_wires(&expr);
+            let rep_expr = replace_in_expr(&expr, &inputs);
+            inputs.values().for_each(|input| {
+                i_wires.insert(input.to_string());
+            });
+            (wire.to_string(), rep_expr.clone())
+        })
+        .collect();
+
+    let rewrite = build_rewrite("HalfAdd", &i_wires.into_iter().collect(), &out_map);
+    println!("{rewrite}");
     // --- end of REWRITE stuff ---
 
     // "mod_filename" is the file name of the module to find half_adders
@@ -222,6 +221,7 @@ fn main() {
             .unwrap();
 
         let st = std::fs::read_to_string(Path::new(&name)).unwrap();
+        rewrite_mod_egraph.parse_and_run_program(&rewrite).unwrap();
 
         // rewrite_mod_egraph.parse_and_run_program(&rewrite).unwrap();
         match rewrite_mod_egraph.parse_and_run_program(&st) {
@@ -233,6 +233,7 @@ fn main() {
                 exit(1);
             }
         };
+
         // println!("Rewrite is: {rewrite}");
         // TODO: Don't want to run rewrite
         // TODO: Make the typing into flags +
@@ -240,7 +241,7 @@ fn main() {
         // if egglog can "undo" those optimizations - but I need to figure out
         // what they are..
         let typing = false;
-        let rewrite = false;
+        let rewrite = true;
         let optimize = false;
         let rewrite_rule = if rewrite { "(saturate rewrites)" } else { "" };
         let typing_rule = if typing { "(saturate typing)" } else { "" };

@@ -1,22 +1,5 @@
 {
   "nodes": {
-    "lakeroad-yosys": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1700450098,
-        "narHash": "sha256-nh7m+7Y+Fkku0pR53ho/qDJAxa3sGzslHgPXJCBOGIY=",
-        "owner": "uwsampl",
-        "repo": "yosys",
-        "rev": "c6fa24e2b2785f304f82c3d6f3625c000b9c9269",
-        "type": "github"
-      },
-      "original": {
-        "owner": "uwsampl",
-        "ref": "gussmith23/lakeroad-backend",
-        "repo": "yosys",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1700390070,
@@ -34,7 +17,6 @@
     },
     "root": {
       "inputs": {
-        "lakeroad-yosys": "lakeroad-yosys",
         "nixpkgs": "nixpkgs"
       }
     }
