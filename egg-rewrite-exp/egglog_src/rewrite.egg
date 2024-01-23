@@ -1,0 +1,54 @@
+;; rewrite lib - requires lang.egg to be loaded first
+(function Module (String Expr) Expr)
+(function Out (String) Expr)
+
+(ruleset rewrites)
+
+(ruleset deoptimize)
+
+;; add some boolean algebra stuff - "deoptimize"
+
+;; absorbtion.
+(rewrite 
+ (Op2 (Or) x (Op2 (And) x y))
+ x
+ :ruleset deoptimize)
+
+(rewrite 
+ (Op2 (And) x (Op2 (Or) x y))
+ x
+ :ruleset deoptimize)
+;; commutativity
+(birewrite 
+ (Op2 (And) x y)
+ (Op2 (And) y x)
+ :ruleset deoptimize)
+(birewrite 
+ (Op2 (Or) x y)
+ (Op2 (Or) y x)
+ :ruleset deoptimize)
+
+;; idempotence
+(rewrite 
+        (Op2 (And) x x)
+        x
+        :ruleset deoptimize
+  )
+(rewrite 
+        (Op2 (Or) x x)
+        x
+        :ruleset deoptimize
+  )
+;; De Morgansk
+
+(birewrite 
+        (Op1 (Not) (Op2 (And) x y))
+        (Op2 (Or) (Op1 (Not) x) (Op1 (Not) y))
+        :ruleset deoptimize
+  )
+
+(birewrite 
+        (Op1 (Not) (Op2 (Or) x y))
+        (Op2 (And) (Op1 (Not) x) (Op1 (Not) y))
+        :ruleset deoptimize
+  )

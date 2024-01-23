@@ -1,46 +1,29 @@
-(include "common/lakeroad_rewrites.egg")
-
 ; wire declarations
-; $and$half-adder.v:17$2_Y
-(let v0 (Wire "v0" 1))
-; $xor$half-adder.v:16$1_Y
-(let v1 (Wire "v1" 1))
-; i_bit2
-(let v2 (Wire "v2" 1))
 ; i_bit1
+(let v0 (Wire "v0" 1))
+; i_bit2
+(let v1 (Wire "v1" 1))
+; o_carry
+(let v2 (Wire "v2" 1))
+; o_sum
 (let v3 (Wire "v3" 1))
 
 ; cells
-(union v0 (Op2 (And) v3 v2))
-(union v1 (Op2 (Xor) v3 v2))
+(union v2 (Op2 (And) v0 v1))
+(union v3 (Op2 (Xor) v0 v1))
 
 ; inputs
-(let i_bit2 (Var "i_bit2" 1))
-(union v2 i_bit2)
 (let i_bit1 (Var "i_bit1" 1))
-(union v3 i_bit1)
+(union v0 i_bit1)
+(let i_bit2 (Var "i_bit2" 1))
+(union v1 i_bit2)
 
 ; outputs
-(let o_carry v0)
-(let o_sum v1)
-(run-schedule
- (repeat 100
-         (saturate typing)
-         ;; (saturate sketch-proposal)
-         (saturate misc)))
+(let o_carry v2)
+(let o_sum v3)
+
 ; delete wire expressions
 (delete (Wire "v0" 1))
 (delete (Wire "v1" 1))
 (delete (Wire "v2" 1))
 (delete (Wire "v3" 1))
-
-(run-schedule
- (repeat 100
-         (saturate typing)
-         ;; (saturate sketch-proposal)
-         (saturate misc)))
-(extract o_sum)
-;;(query-extract (HasType o_sum (Bitvector 1)))
-;; TODO I need to figure out a way to change the "Var" wires into expressions to match for.. and also see if I optimize things - can I still extract a half-adder..?
-
-;; Reserach question: How do I turn this definition into a rewrite rule..?

@@ -1,0 +1,7 @@
+# read design
+read_verilog   74181.v 
+hierarchy -top Circuit74181; 
+# flatten;
+
+# write_verilog -noattr synth.v
+write_lakeroad 

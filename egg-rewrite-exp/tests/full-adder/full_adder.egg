@@ -1,40 +1,40 @@
 ; wire declarations
-; $flatten\half_adder1.$and$half_adder.v:17$3_Y
-(let v0 (Wire "v0" 1))
-; $flatten\half_adder1.$xor$half_adder.v:16$2_Y
-(let v1 (Wire "v1" 1))
-; $flatten\half_adder2.$and$half_adder.v:17$3_Y
-(let v2 (Wire "v2" 1))
-; $flatten\half_adder2.$xor$half_adder.v:16$2_Y
-(let v3 (Wire "v3" 1))
-; $or$full_adder.v:34$1_Y
-(let v4 (Wire "v4" 1))
 ; i_bit1
-(let v5 (Wire "v5" 1))
+(let v0 (Wire "v0" 1))
 ; i_bit2
-(let v6 (Wire "v6" 1))
+(let v1 (Wire "v1" 1))
+; half_adder1.o_carry
+(let v2 (Wire "v2" 1))
+; half_adder1.o_sum
+(let v3 (Wire "v3" 1))
 ; i_cin
+(let v4 (Wire "v4" 1))
+; half_adder2.o_carry
+(let v5 (Wire "v5" 1))
+; half_adder2.o_sum
+(let v6 (Wire "v6" 1))
+; o_carry
 (let v7 (Wire "v7" 1))
 
 ; cells
-(union v0 (Op2 (And) v5 v6))
-(union v1 (Op2 (Xor) v5 v6))
-(union v2 (Op2 (And) v7 v1))
-(union v3 (Op2 (Xor) v7 v1))
-(union v4 (Op2 (Or) v0 v2))
+(union v2 (Op2 (And) v0 v1))
+(union v3 (Op2 (Xor) v0 v1))
+(union v5 (Op2 (And) v4 v3))
+(union v6 (Op2 (Xor) v4 v3))
+(union v7 (Op2 (Or) v2 v5))
 
 ; inputs
 (let i_bit1 (Var "i_bit1" 1))
-(union v5 i_bit1)
+(union v0 i_bit1)
 (let i_bit2 (Var "i_bit2" 1))
-(union v6 i_bit2)
+(union v1 i_bit2)
 (let i_cin (Var "i_cin" 1))
-(union v7 i_cin)
+(union v4 i_cin)
 
 ; outputs
-(let o_carry (Out v4))
-(let o_sum (Out v3))
-; Maybe you an can just use a rewrite to delete the wire expressions instead..?
+(let o_carry v7)
+(let o_sum v6)
+
 ; delete wire expressions
 (delete (Wire "v0" 1))
 (delete (Wire "v1" 1))
@@ -44,4 +44,3 @@
 (delete (Wire "v5" 1))
 (delete (Wire "v6" 1))
 (delete (Wire "v7" 1))
-

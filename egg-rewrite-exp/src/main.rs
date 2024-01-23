@@ -79,7 +79,11 @@ fn build_rewrite(name: &str, inputs: &Vec<String>, outputs: &Vec<(String, Expr)>
     let mut rhs = String::new();
 
     // TODO I might use different syntax here..
-    write!(&mut rhs, "(let {name_lower} (Module \"{name}\" (Concat ").unwrap();
+    write!(
+        &mut rhs,
+        "(let {name_lower} (Module \"{name}\" (Op2 (Concat) "
+    )
+    .unwrap();
     for i in inputs {
         write!(&mut rhs, "{i} ").unwrap();
     }
@@ -88,7 +92,11 @@ fn build_rewrite(name: &str, inputs: &Vec<String>, outputs: &Vec<(String, Expr)>
     for (i, (name, output_expr)) in outputs.iter().enumerate() {
         let i1 = i + 1;
         writeln!(&mut lhs, "(= {output_expr} {name})").unwrap();
-        writeln!(&mut rhs, "(union {name} (Extract {i1} {i} {name_lower}))").unwrap();
+        writeln!(
+            &mut rhs,
+            "(union {name} (Op1 (Extract {i1} {i}) {name_lower}))"
+        )
+        .unwrap();
     }
     let template = format!("(rule \n(\n{lhs}) \n({rhs}) :ruleset rewrites)");
     // TODO need to get all of the variables in the expression
@@ -103,6 +111,20 @@ fn to_svg(e: &EGraph, path: &str) {
     let path_str = svg_path.to_str().unwrap();
     println!("Print svg to: {path_str}");
     serialized.to_svg_file(svg_path).unwrap();
+}
+
+/// Runs the Egg file - exits the program if the fail failed
+fn run_egg_file(e: &mut EGraph, name: &str, egg: &str) {
+    println!("Running egraph {name}");
+    match e.parse_and_run_program(egg) {
+        Ok(_msgs) => {
+            println!("Running egraph {name} succeed");
+        }
+        Err(err) => {
+            println!("Running egraph {name} failed with error: {err}");
+            exit(1);
+        }
+    };
 }
 
 #[derive(Parser, Debug)]
@@ -123,7 +145,8 @@ fn main() {
         .init();
     let args = Args::parse();
 
-    let rewrite_lib = include_str!("../egglog_src/lakeroad_rewrites.egg");
+    let lang_lib = include_str!("../egglog_src/lang.egg");
+    let rewrite_lib = include_str!("../egglog_src/rewrite.egg");
     // let optimize_lib = include_str!("../egglog_src/optimize.egg");
 
     // 1. load file into egglog
@@ -131,50 +154,13 @@ fn main() {
     // 3. do the rewrite or something
 
     let mut std_mod_egraph = egglog::EGraph::default();
-
     // this is the egg_src rewrite lib
-    std_mod_egraph.parse_and_run_program(rewrite_lib).unwrap();
+    std_mod_egraph.parse_and_run_program(lang_lib).unwrap();
     // std_mod_egraph.parse_and_run_program(optimize_lib).unwrap();
-
-    let st = std::fs::read_to_string(Path::new(&args.lib_filename)).unwrap();
-    // Need to traverse the AST for all of the output variables..?
-
-    match std_mod_egraph.parse_and_run_program(&st) {
-        Ok(_msgs) => {
-            println!("Ran egglog to generate the rewrite succeed!");
-        }
-        Err(err) => {
-            println!("{err}");
-            exit(1);
-        }
-    };
-
-    // FIXME: Need to be able to replicate the bug with optimizedel
-    // let rule = format!("(run-schedule (repeat 100  (saturate optimizedel)))");
-    //
-    // match std_mod_egraph.parse_and_run_program(&rule) {
-    //     Ok(msgs) => {
-    //         println!("Run schedule succeed");
-    //         for msg in msgs {
-    //             println!("{msg}");
-    //         }
-    //     }
-    //     Err(err) => {
-    //         println!("Run schedule failed: {err}");
-    //         exit(1);
-    //     }
-    // }
-    // let r = std_mod_egraph
-    //     .parse_and_run_program("(extract o_sum)")
-    //     .unwrap();
-    // // Print out the extracts
-    // for msg in r {
-    //     println!("Extract: {msg}");
-    // }
-    // This is the SVG stuff
+    let lib_file = Path::new(&args.lib_filename);
+    let st = std::fs::read_to_string(lib_file).unwrap();
+    run_egg_file(&mut std_mod_egraph, &args.lib_filename, &st);
     to_svg(&std_mod_egraph, &args.lib_filename);
-    // The question is can I export this to somewhere else..?
-
     //  ---- REWRITE STUFF ----
     // Here, we have to clone because the hashmap references will be invalidated
     // when I mutate it by evaling an expression
@@ -205,8 +191,12 @@ fn main() {
             (wire.to_string(), rep_expr.clone())
         })
         .collect();
-
-    let rewrite = build_rewrite("HalfAdd", &i_wires.into_iter().collect(), &out_map);
+    // TODO: Need to fix this up.
+    let rewrite = build_rewrite(
+        lib_file.file_stem().unwrap().to_str().unwrap(),
+        &i_wires.into_iter().collect(),
+        &out_map,
+    );
     println!("{rewrite}");
     // --- end of REWRITE stuff ---
 
@@ -216,6 +206,7 @@ fn main() {
         // 1. build up a new egraph
         let mut rewrite_mod_egraph = EGraph::default();
 
+        rewrite_mod_egraph.parse_and_run_program(lang_lib).unwrap();
         rewrite_mod_egraph
             .parse_and_run_program(rewrite_lib)
             .unwrap();
@@ -233,25 +224,25 @@ fn main() {
                 exit(1);
             }
         };
-
         // println!("Rewrite is: {rewrite}");
         // TODO: Don't want to run rewrite
         // TODO: Make the typing into flags +
         // I want to be able to run _detructive_ optimizations and see
         // if egglog can "undo" those optimizations - but I need to figure out
         // what they are..
-        let typing = false;
         let rewrite = true;
-        let optimize = false;
+        let deoptimize = true;
         let rewrite_rule = if rewrite { "(saturate rewrites)" } else { "" };
-        let typing_rule = if typing { "(saturate typing)" } else { "" };
-        let optimize_rule = if optimize { "(saturate optimize)" } else { "" };
+        let deoptimize_rule = if deoptimize {
+            "(saturate deoptimize)"
+        } else {
+            ""
+        };
 
-        let rule =
-            format!("(run-schedule (repeat 100  {typing_rule}  {optimize_rule} {rewrite_rule}))");
+        let rule = format!("(run-schedule (repeat 10 {deoptimize_rule} {rewrite_rule}  ))");
         match rewrite_mod_egraph.parse_and_run_program(&rule) {
             Ok(msgs) => {
-                println!("Run schedule succeed");
+                println!("Run rewrites succeeded");
                 for msg in msgs {
                     println!("{msg}");
                 }

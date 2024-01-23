@@ -2,3 +2,4 @@
 ** TODO Work on building fork of yosys to convert to egglog
 ** TODO Write some sample definitions to add as lib components(=half-adder=)
 ** TODO Try running the rewrites on unoptimized BTOR output on a bigger component
+** TODO 

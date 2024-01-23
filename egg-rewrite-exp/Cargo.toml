@@ -9,7 +9,7 @@ edition = "2021"
 anyhow = "1.0.75"
 clap = { version = "4.4.7", features = ["derive"] }
 # Switch to dev version (github version) of egglog
-egglog = { git = "https://github.com/egraphs-good/egglog.git" }
+egglog = { git = "https://github.com/egraphs-good/egglog", rev = "fc908702821852a9bb990549bdcf37b088bdff28" }
 env_logger = "0.10.0"
 log = "0.4.20"
 regex = "1.10.2"

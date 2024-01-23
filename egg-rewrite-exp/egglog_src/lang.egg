@@ -1,5 +1,4 @@
-;; TODO: Language stuff - need to support the same syntax as
-;; Lakeroad - but I want to support different stuff
+;; The minimal syntax of the output of the lakeroad language
 (sort IVec (Vec i64))
 
 ;; Support Vectors of expressions

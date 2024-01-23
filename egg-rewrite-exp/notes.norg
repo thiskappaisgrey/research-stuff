@@ -4,7 +4,30 @@
   - I can see the inputs as variables - but I can't see the outputs..?
 
 * List of TODO
-** ( ) Figure out how to do optimizations by extracting out 1 representation and removing others
+** (-) Figure out how to do optimizations by extracting out 1 representation and removing others
    - I.e. I can't delete the XOR when I try to "remove" them from the egraph
    - I'd like to be able to extract stuff from verilog once - and get other representations for free
-** ( ) 
+** ( ) Need to find modules - and try to find them without optimization
+   - https://web.eecs.umich.edu/~jhayes/iscas.restore/benchmark.html - could be interesting
+   - Get some links from Jon
+   - Write some of my own test cases - see if the module finding can find "applications" of modules
+   - Netlists are symmetric monoidal categories! Maybe there's a connection in there with EGraphs?
+** ( ) Try something simpler
+   - don't use "add" - since there are multiple different types of adders
+   - Try to find XORs in a netlist of NANDS
+   - try to avoid "opt"..
+   - XOR gates too small for it to matter..?
+** Converting to luts
+   - We can convert luts to sum of products
+   - we can "lift" stuff up into components
+   - optimal way - normal form for sum-of-products
+** Benchmarks
+   - ( ) https://github.com/PrincetonUniversity/OPDB
+   - ( ) https://github.com/bsg-idea/bsg_micro_designs
+** Automate the "is there an instance of a module inside"
+** "Extract" the components that we found - output the code - then translate to verilog
+   - instead of deleting we extract
+   - extract into the "right" stuff
+   - use the "egglog" extract
+   -- Extraction is what we use to "verify" that it's working
+

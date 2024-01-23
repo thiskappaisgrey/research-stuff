@@ -1,0 +1,40 @@
+# read_verilog ./half-adder.v
+read_verilog ./xor.v
+prep -top myxor
+# elaborate design hierarchy
+hierarchy -check -top myxor
+
+# the high-level stuff
+# proc; opt; fsm; opt; memory; opt
+# mapping to internal cell library
+
+# mapping flip-flops to mycells.lib
+dfflibmap -liberty ./mycells-not-working.lib
+techmap;  # opt
+# mapping logic to mycells.lib
+abc -liberty mycells-not-working.lib
+
+# cleanup
+# clean
+# write synthesized design
+# write_verilog synth.v
+# design -reset
+#
+
+# write into an "abc" techmap design 
+# then read + flatten to get a design with XORs
+read_verilog ./mycells-not-working.v
+# read_verilog synth.v
+# prep -top full_adder
+flatten;
+write_verilog myxor_synth.v
+# abc; opt;
+# proc;
+# techmap -map ./techmap.v; opt;
+# write_verilog out.v;
+# pmuxtree
+# proc; memory;
+# techmap; opt;
+# flatten;
+# abc; opt;
+write_lakeroad XOR.egg

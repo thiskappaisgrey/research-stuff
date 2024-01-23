@@ -27,6 +27,9 @@
       #   doCheck = false;
       #   buildInputs = previousAttrs.buildInputs ++ [ pkgs.boost ];
       # });
+
+      pyrtl = pkgs.python3Packages.callPackage ./pyrtl.nix { };
+
     in {
       devShells."${system}".default = pkgs.mkShell {
 
@@ -46,7 +49,7 @@
           lit
           llvmPackages.bintools-unwrapped
           yosys-synlig
-          (python3.withPackages (p: with p; [ cocotb ]))
+          (python3.withPackages (p: with p; [ cocotb pyrtl ]))
 
           # For developing yosys
           ccls
