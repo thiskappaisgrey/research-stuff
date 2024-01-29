@@ -1,0 +1,53 @@
+; wire declarations
+; a
+(let v0 (Wire "v0" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$83.$not$./tests/gate_finding/mycells-not-working.v:4$88_Y
+(let v1 (Wire "v1" 1))
+; b
+(let v2 (Wire "v2" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$84.$not$./tests/gate_finding/mycells-not-working.v:4$88_Y
+(let v3 (Wire "v3" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$85.$not$./tests/gate_finding/mycells-not-working.v:14$92_Y
+(let v4 (Wire "v4" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$86.$not$./tests/gate_finding/mycells-not-working.v:14$92_Y
+(let v5 (Wire "v5" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$87.$not$./tests/gate_finding/mycells-not-working.v:14$92_Y
+(let v6 (Wire "v6" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$85.$or$./tests/gate_finding/mycells-not-working.v:14$91_Y
+(let v7 (Wire "v7" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$86.$or$./tests/gate_finding/mycells-not-working.v:14$91_Y
+(let v8 (Wire "v8" 1))
+; $flatten$abc$82$auto$blifparse.cc:386:parse_blif$87.$or$./tests/gate_finding/mycells-not-working.v:14$91_Y
+(let v9 (Wire "v9" 1))
+
+; cells
+(union v1 (Op1 (Not) v0))
+(union v3 (Op1 (Not) v2))
+(union v4 (Op1 (Not) v7))
+(union v7 (Op2 (Or) v1 v3))
+(union v5 (Op1 (Not) v8))
+(union v8 (Op2 (Or) v0 v2))
+(union v6 (Op1 (Not) v9))
+(union v9 (Op2 (Or) v4 v5))
+
+; inputs
+(let a (Var "a" 1))
+(union v0 a)
+(let b (Var "b" 1))
+(union v2 b)
+
+; outputs
+(let c v6)
+(let d v4)
+
+; delete wire expressions
+(delete (Wire "v0" 1))
+(delete (Wire "v1" 1))
+(delete (Wire "v2" 1))
+(delete (Wire "v3" 1))
+(delete (Wire "v4" 1))
+(delete (Wire "v5" 1))
+(delete (Wire "v6" 1))
+(delete (Wire "v7" 1))
+(delete (Wire "v8" 1))
+(delete (Wire "v9" 1))

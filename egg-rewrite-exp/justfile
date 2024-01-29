@@ -1,0 +1,45 @@
+set shell := ["bash", "-c"]
+# The yosys script for stuff
+yosys := "../lakeroad-yosys/yosys"
+gen_yosys := "python ./scripts/yosys.py"
+
+# These can be overwritten
+# testpath := "./tests/gate_finding/xor.v"
+# modname := "myxor"
+
+lib := "./tests/gate_finding/mycells-not-working.lib"
+libimpl := "./tests/gate_finding/mycells-not-working.v"
+
+outdir := "./out"
+
+adder-yosys := '''
+read_verilog ./tests/full-adder/half-adder.v;
+prep -top half_adder;
+pmuxtree;
+proc; opt; memory; opt;
+flatten; opt;
+write_lakeroad ./out/half-adder.egg;
+
+read_verilog -sv ./tests/full-adder/full_adder.v;
+prep -top full_adder;
+pmuxtree;
+proc; opt; memory; opt;
+flatten; opt;
+write_lakeroad ./out/full_adder.egg;
+design -reset;
+'''
+
+build testpath modname:
+        {{gen_yosys}} {{testpath}} {{outdir}} {{modname}} {{lib}} {{libimpl}}  > {{outdir}}/temp.ys
+        {{yosys}} {{outdir}}/temp.ys
+
+build-adder:
+        {{yosys}} -p "{{adder-yosys}}" 
+        cargo run -- {{outdir}}/half_adder.egg {{outdir}}/full_adder.egg
+
+build-xor: (build "./tests/gate_finding/xor.v" "myxor") (build "./tests/gate_finding/test1.v" "test")
+        cargo run -- {{outdir}}/xor.egg  {{outdir}}/test1.egg        
+clean:
+        rm out/*
+        
+

@@ -1,0 +1,29 @@
+; wire declarations
+; i_bit1
+(let v0 (Wire "v0" 1))
+; i_bit2
+(let v1 (Wire "v1" 1))
+; o_carry
+(let v2 (Wire "v2" 1))
+; o_sum
+(let v3 (Wire "v3" 1))
+
+; cells
+(union v2 (Op2 (And) v0 v1))
+(union v3 (Op2 (Xor) v0 v1))
+
+; inputs
+(let i_bit1 (Var "i_bit1" 1))
+(union v0 i_bit1)
+(let i_bit2 (Var "i_bit2" 1))
+(union v1 i_bit2)
+
+; outputs
+(let o_carry v2)
+(let o_sum v3)
+
+; delete wire expressions
+(delete (Wire "v0" 1))
+(delete (Wire "v1" 1))
+(delete (Wire "v2" 1))
+(delete (Wire "v3" 1))
