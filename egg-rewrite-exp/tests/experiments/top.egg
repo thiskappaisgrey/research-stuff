@@ -1,0 +1,216 @@
+; wire declarations
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$326.$or$./mycells.v:8$334_Y
+(let v0 (Wire "v0" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$325.$not$./mycells.v:3$329_Y
+(let v1 (Wire "v1" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$328.$and$./mycells.v:12$335_Y
+(let v2 (Wire "v2" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$327.$and$./mycells.v:12$335_Y
+(let v3 (Wire "v3" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$321.$and$./mycells.v:12$335_Y
+(let v4 (Wire "v4" 1))
+; i_instr
+(let v5 (Wire "v5" 12))
+(let v6 (Op1 (Extract 2 2) v5))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$318.$not$./mycells.v:3$329_Y
+(let v7 (Wire "v7" 1))
+(let v8 (Op1 (Extract 0 0) v5))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$319.$not$./mycells.v:3$329_Y
+(let v9 (Wire "v9" 1))
+(let v10 (Op1 (Extract 7 7) v5))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$320.$and$./mycells.v:12$335_Y
+(let v11 (Wire "v11" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$322.$and$./mycells.v:12$335_Y
+(let v12 (Wire "v12" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$323.$and$./mycells.v:12$335_Y
+(let v13 (Wire "v13" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$324.$not$./mycells.v:24$339_Y
+(let v14 (Wire "v14" 1))
+(let v15 (Op1 (Extract 11 8) v5))
+(let v16 (Op1 (Extract 6 3) v5))
+(let v17 (Op1 (Extract 1 1) v5))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$324.$or$./mycells.v:24$338_Y
+(let v18 (Wire "v18" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$326.$and$./mycells.v:8$331_Y
+(let v19 (Wire "v19" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$326.$and$./mycells.v:8$333_Y
+(let v20 (Wire "v20" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$326.$not$./mycells.v:8$330_Y
+(let v21 (Wire "v21" 1))
+; $flatten$abc$317$auto$blifparse.cc:386:parse_blif$326.$not$./mycells.v:8$332_Y
+(let v22 (Wire "v22" 1))
+; $flatten\alu.$auto$rtlil.cc:2660:NotGate$308
+(let v23 (Wire "v23" 1))
+; $flatten\alu.$auto$rtlil.cc:2660:NotGate$310
+(let v24 (Wire "v24" 1))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$156
+(let v25 (Wire "v25" 2))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$161
+(let v26 (Wire "v26" 2))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$166
+(let v27 (Wire "v27" 2))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$171
+(let v28 (Wire "v28" 2))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$176
+(let v29 (Wire "v29" 2))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$206
+(let v30 (Wire "v30" 2))
+; $flatten\alu.$auto$simplemap.cc:158:logic_reduce$148
+(let v31 (Wire "v31" 1))
+; $flatten\alu.$auto$simplemap.cc:246:simplemap_eqne$111
+(let v32 (Wire "v32" 1))
+; $flatten\alu.$auto$simplemap.cc:246:simplemap_eqne$132
+(let v33 (Wire "v33" 1))
+; $flatten\alu.$auto$simplemap.cc:246:simplemap_eqne$142
+(let v34 (Wire "v34" 1))
+; $flatten\alu.$procmux$9.B
+(let v35 (Wire "v35" 20))
+; $flatten\alu.$procmux$9.B_AND_S
+(let v36 (Wire "v36" 20))
+; $flatten\alu.$procmux$9.S
+(let v37 (Wire "v37" 4))
+; $flatten\alu.$procmux$9.Y_B
+(let v38 (Wire "v38" 5))
+; { $flatten\alu.$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.CO [4:1] $flatten\alu.$procmux$9.B [0] }
+(let v39 (Op1 (Extract 0 0) v35))
+; $flatten\alu.$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.CO
+(let v40 (Wire "v40" 5))
+(let v41 (Op1 (Extract 4 1) v40))
+(let v42 (Op2 (Concat) v39 v41))
+; { $flatten\alu.$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.X [4:1] $flatten\alu.$procmux$9.B [15] }
+(let v43 (Op1 (Extract 15 15) v35))
+; $flatten\alu.$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.X
+(let v44 (Wire "v44" 5))
+(let v45 (Op1 (Extract 4 1) v44))
+(let v46 (Op2 (Concat) v43 v45))
+; $flatten\alu.$techmap$procmux$9.$reduce_or$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:597$117_Y
+(let v47 (Wire "v47" 1))
+; $flatten\alu.$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.BB
+(let v48 (Wire "v48" 5))
+; $flatten\alu.$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.CO
+(let v49 (Wire "v49" 5))
+; $flatten\alu.$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.X
+(let v50 (Wire "v50" 5))
+; $flatten\alu.$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.G
+(let v51 (Wire "v51" 5))
+; $flatten\alu.$techmap$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$230_Y
+(let v52 (Wire "v52" 1))
+; $flatten\alu.$techmap$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$233_Y
+(let v53 (Wire "v53" 1))
+; $flatten\alu.$techmap$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$236_Y
+(let v54 (Wire "v54" 1))
+; $flatten\alu.$techmap$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:241$235_Y
+(let v55 (Wire "v55" 1))
+; $flatten\alu.$techmap$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:248$239_Y
+(let v56 (Wire "v56" 1))
+; $flatten\alu.$techmap$techmap$add$./alu.sv:11$2.$auto$alumacc.cc:485:replace_alu$91.lcu.$or$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$234_Y
+(let v57 (Wire "v57" 1))
+; $flatten\alu.$techmap$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$230_Y
+(let v58 (Wire "v58" 1))
+; $flatten\alu.$techmap$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$233_Y
+(let v59 (Wire "v59" 1))
+; $flatten\alu.$techmap$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$236_Y
+(let v60 (Wire "v60" 1))
+; $flatten\alu.$techmap$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:241$235_Y
+(let v61 (Wire "v61" 1))
+; $flatten\alu.$techmap$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.$and$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:248$239_Y
+(let v62 (Wire "v62" 1))
+; $flatten\alu.$techmap$techmap$sub$./alu.sv:12$3.$auto$alumacc.cc:485:replace_alu$94.lcu.$or$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240$234_Y
+(let v63 (Wire "v63" 1))
+; { 4'0000 \i_instr [2] }
+; 4'0000
+(let v64 (Op0 (BV 0 4)))
+(let v65 (Op2 (Concat) v6 v64))
+; { 4'0000 \i_instr [7] }
+(let v66 (Op2 (Concat) v10 v64))
+; { 1'0 \i_instr [0] }
+; 1'0
+(let v67 (Op0 (BV 0 1)))
+(let v68 (Op2 (Concat) v8 v67))
+; { $flatten$abc$317$auto$blifparse.cc:386:parse_blif$321.$and$./mycells.v:12$335_Y $flatten$abc$317$auto$blifparse.cc:386:parse_blif$327.$and$./mycells.v:12$335_Y $flatten$abc$317$auto$blifparse.cc:386:parse_blif$328.$and$./mycells.v:12$335_Y $flatten$abc$317$auto$blifparse.cc:386:parse_blif$325.$not$./mycells.v:3$329_Y $flatten$abc$317$auto$blifparse.cc:386:parse_blif$326.$or$./mycells.v:8$334_Y }
+(let v69 (Op2 (Concat) v0 v1))
+(let v70 (Op2 (Concat) v69 v2))
+(let v71 (Op2 (Concat) v70 v3))
+(let v72 (Op2 (Concat) v71 v4))
+(let v73 (Op1 (Extract 6 2) v5))
+(let v74 (Op1 (Extract 11 7) v5))
+(let v75 (Op1 (Extract 1 0) v5))
+
+; cells
+(union v7 (Op1 (Not) v6))
+(union v9 (Op1 (Not) v8))
+(union v11 (Op2 (And) v10 v8))
+(union v4 (Op2 (And) v7 v11))
+(union v12 (Op2 (And) v6 v10))
+(union v13 (Op2 (And) v9 v12))
+(union v14 (Op1 (Not) v18))
+(union v18 (Op2 (Or) v4 v13))
+(union v1 (Op1 (Not) v14))
+(union v19 (Op2 (And) v6 v21))
+(union v20 (Op2 (And) v22 v10))
+(union v21 (Op1 (Not) v10))
+(union v22 (Op1 (Not) v6))
+(union v0 (Op2 (Or) v19 v20))
+(union v3 (Op2 (And) v7 v11))
+(union v2 (Op2 (And) v7 v11))
+
+; inputs
+(let i_instr (Var "i_instr" 12))
+(union v5 i_instr)
+
+; outputs
+(let o_out v72)
+
+; delete wire expressions
+(delete (Wire "v0" 1))
+(delete (Wire "v1" 1))
+(delete (Wire "v2" 1))
+(delete (Wire "v3" 1))
+(delete (Wire "v4" 1))
+(delete (Wire "v5" 12))
+(delete (Wire "v7" 1))
+(delete (Wire "v9" 1))
+(delete (Wire "v11" 1))
+(delete (Wire "v12" 1))
+(delete (Wire "v13" 1))
+(delete (Wire "v14" 1))
+(delete (Wire "v18" 1))
+(delete (Wire "v19" 1))
+(delete (Wire "v20" 1))
+(delete (Wire "v21" 1))
+(delete (Wire "v22" 1))
+(delete (Wire "v23" 1))
+(delete (Wire "v24" 1))
+(delete (Wire "v25" 2))
+(delete (Wire "v26" 2))
+(delete (Wire "v27" 2))
+(delete (Wire "v28" 2))
+(delete (Wire "v29" 2))
+(delete (Wire "v30" 2))
+(delete (Wire "v31" 1))
+(delete (Wire "v32" 1))
+(delete (Wire "v33" 1))
+(delete (Wire "v34" 1))
+(delete (Wire "v35" 20))
+(delete (Wire "v36" 20))
+(delete (Wire "v37" 4))
+(delete (Wire "v38" 5))
+(delete (Wire "v40" 5))
+(delete (Wire "v44" 5))
+(delete (Wire "v47" 1))
+(delete (Wire "v48" 5))
+(delete (Wire "v49" 5))
+(delete (Wire "v50" 5))
+(delete (Wire "v51" 5))
+(delete (Wire "v52" 1))
+(delete (Wire "v53" 1))
+(delete (Wire "v54" 1))
+(delete (Wire "v55" 1))
+(delete (Wire "v56" 1))
+(delete (Wire "v57" 1))
+(delete (Wire "v58" 1))
+(delete (Wire "v59" 1))
+(delete (Wire "v60" 1))
+(delete (Wire "v61" 1))
+(delete (Wire "v62" 1))
+(delete (Wire "v63" 1))

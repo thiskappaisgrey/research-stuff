@@ -1,15 +1,12 @@
 read_verilog ./half-adder.v
 prep -top half_adder;
-pmuxtree
-proc; opt; memory; opt
-flatten; opt;
+flatten; 
 write_lakeroad ./half-adder.egg
 
 read_verilog -sv ./full_adder.v
 prep -top full_adder
-pmuxtree
-proc; opt; memory; opt
-flatten; opt;
+flatten;
+write_verilog ./full_adder_syth.v
 write_lakeroad ./full_adder.egg
 design -reset
 

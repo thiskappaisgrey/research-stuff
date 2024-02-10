@@ -37,8 +37,8 @@
 (union v2 b)
 
 ; outputs
-(let c v6)
-(let d v4)
+(let o_c v6)
+(let o_d v4)
 
 ; delete wire expressions
 (delete (Wire "v0" 1))

@@ -114,7 +114,6 @@ design -reset
 
 We can represent the netlist using the an EGraph (the `write_lakeroad` line). For this example, _no optimizations were applied to the netlist_. Given a bigger Egraph contained in `full_adder.egg`, we can try to find the exact match of the smaller EGraph, `half_adder.egg`. This problem is also known as _subgraph isomorphism_. #footnote[https://en.wikipedia.org/wiki/Subgraph_isomorphism_problem]
 
-#pagebreak()
 The EGraph of the half adder looks like this:
 #figure(
   image("./half_adder.svg", height: 30%),

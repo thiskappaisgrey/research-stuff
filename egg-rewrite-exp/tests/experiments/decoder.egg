@@ -1,0 +1,20 @@
+; wire declarations
+; i_instr
+(let v0 (Wire "v0" 12))
+(let v1 (Op1 (Extract 6 2) v0))
+(let v2 (Op1 (Extract 11 7) v0))
+(let v3 (Op1 (Extract 1 0) v0))
+
+; cells
+
+; inputs
+(let i_instr (Var "i_instr" 12))
+(union v0 i_instr)
+
+; outputs
+(let o_a v1)
+(let o_b v2)
+(let o_op v3)
+
+; delete wire expressions
+(delete (Wire "v0" 12))

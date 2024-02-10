@@ -51,12 +51,15 @@
           yosys-synlig
           (python3.withPackages (p: with p; [ cocotb pyrtl ]))
 
+          just
+
           # For developing yosys
           ccls
           bear
           clang-tools
           boost
           clang
+
         ];
       };
       # packages."${system}".lakeroad-yosys = yosys1;

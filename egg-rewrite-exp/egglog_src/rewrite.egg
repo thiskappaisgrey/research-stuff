@@ -1,5 +1,9 @@
 ;; rewrite lib - requires lang.egg to be loaded first
-(function Module (String Expr) Expr)
+
+;; Rather than having one module node
+;; I just add to the syntax..
+(function Module (String Expr) Expr :cost 0)
+
 (function Out (String) Expr)
 
 (ruleset rewrites)
