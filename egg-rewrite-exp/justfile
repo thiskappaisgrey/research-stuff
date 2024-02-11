@@ -39,6 +39,7 @@ build-adder:
 
 build-xor: (build "./tests/gate_finding/xor.v" "myxor") (build "./tests/gate_finding/test1.v" "test")
         cargo run -- {{outdir}}/xor.egg  {{outdir}}/test1.egg        
+
 clean:
         rm out/*
         

@@ -7,8 +7,7 @@ module alu (
 );
   always_comb  begin
     case (i_control)
-      // 4'b0000: o_res = i_a + i_b; // Addition
-      2'b00: o_res = i_a + i_b; // Bitwise XOR
+      2'b00: o_res = i_a + i_b; // Bitwise additon
       2'b01: o_res = i_a - i_b; // Subtraction
       2'b10: o_res = i_a | i_b; // Bitwise OR
       2'b11: o_res = i_a & i_b; // Bitwise AND

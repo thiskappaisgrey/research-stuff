@@ -27,7 +27,7 @@ if __name__ == "__main__":
     outegg = out_path /  Path(test_path.stem + ".egg")
 
     yosys_script1 = f'''
-read_verilog {test_path};
+read_verilog -sv {test_path};
 prep -top {mod_name};
 # elaborate design hierarchy
 hierarchy -check -top {mod_name};
@@ -40,7 +40,7 @@ techmap;  # opt
 abc -liberty {cell_lib};
 # write into an "abc" techmap design 
 # then read + flatten to get a design with XORs
-read_verilog {cell_impl};
+read_verilog -sv {cell_impl};
 flatten;
 write_verilog {outv};
 write_lakeroad {outegg};'''

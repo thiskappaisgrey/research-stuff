@@ -1,0 +1,6 @@
+{
+  rewrites: [
+    "./tests/experiments/alu.sv",
+    "./tests/experiments/decoder.sv"
+  ]
+}
