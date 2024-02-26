@@ -1,10 +1,10 @@
 module top (
-        input logic [11:0] i_instr,
-        output logic [4:0] o_out
+        input logic [3:0] i_instr,
+        output logic  o_out
         );
-    wire o_op;
-    wire o_a;
-    wire o_b;
+    logic [1:0] o_op;
+    logic  o_a;
+    logic  o_b;
     decoder decoder(.i_instr (i_instr), 
           .o_op (o_op),
           .o_a (o_a),

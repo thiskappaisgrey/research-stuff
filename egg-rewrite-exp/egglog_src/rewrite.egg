@@ -13,46 +13,72 @@
 ;; add some boolean algebra stuff - "deoptimize"
 
 ;; absorbtion.
-(rewrite 
- (Op2 (Or) x (Op2 (And) x y))
- x
- :ruleset deoptimize)
-
-(rewrite 
- (Op2 (And) x (Op2 (Or) x y))
- x
- :ruleset deoptimize)
+;; (rewrite 
+;;  (Op2 (Or) x (Op2 (And) x y))
+;;  x
+;;  :ruleset deoptimize)
+;;
+;; (rewrite 
+;;  (Op2 (And) x (Op2 (Or) x y))
+;;  x
+;;  :ruleset deoptimize)
 ;; commutativity
-(birewrite 
- (Op2 (And) x y)
- (Op2 (And) y x)
- :ruleset deoptimize)
-(birewrite 
- (Op2 (Or) x y)
- (Op2 (Or) y x)
- :ruleset deoptimize)
+;; (rewrite 
+;;  (Op2 (And) x y)
+;;  (Op2 (And) y x)
+;;  :ruleset deoptimize)
+;; (rewrite 
+;;  (Op2 (Or) x y)
+;;  (Op2 (Or) y x)
+;;  :ruleset deoptimize)
+;; associativity
+;; (rewrite 
+;;  (Op2 (Or) x (Op2 (Or) y z))
+;;  (Op2 (Or) (Op2 (Or) x y) z)
+;;  :ruleset deoptimize)
+;; (rewrite 
+;;  (Op2 (And) x (Op2 (And) y z))
+;;  (Op2 (And) (Op2 (And) x y) z)
+;;  :ruleset deoptimize)
 
 ;; idempotence
+;; (rewrite 
+;;         (Op2 (And) x x)
+;;         x
+;;         :ruleset deoptimize
+;;   )
+;; (rewrite 
+;;         (Op2 (Or) x x)
+;;         x
+;;         :ruleset deoptimize
+;;   )
+;;
+;; (rewrite 
+;;         (Op1 (Not) (Op1 (Not) x))
+;;         x
+;;         :ruleset deoptimize)
+
+;; distributivity
 (rewrite 
-        (Op2 (And) x x)
-        x
-        :ruleset deoptimize
-  )
-(rewrite 
-        (Op2 (Or) x x)
-        x
-        :ruleset deoptimize
-  )
+        (Op2 (And) p (Op2 (Or) q r))
+        (Op2 (Or) (Op2 (And) p q) (Op2 (And) p r))
+        :ruleset deoptimize)
+;; (rewrite 
+;;         (Op2 (Or) p (Op2 (And) q r))
+;;         (Op2 (And) (Op2 (Or) p q) (Op2 (Or) p r))
+        ;; :ruleset deoptimize)
+
+
 ;; De Morgansk
 
-(birewrite 
-        (Op1 (Not) (Op2 (And) x y))
-        (Op2 (Or) (Op1 (Not) x) (Op1 (Not) y))
-        :ruleset deoptimize
-  )
-
-(birewrite 
-        (Op1 (Not) (Op2 (Or) x y))
-        (Op2 (And) (Op1 (Not) x) (Op1 (Not) y))
-        :ruleset deoptimize
-  )
+;; (rewrite 
+;;         (Op1 (Not) (Op2 (And) x y))
+;;         (Op2 (Or) (Op1 (Not) x) (Op1 (Not) y))
+;;         :ruleset deoptimize
+;;   )
+;;
+;; (rewrite 
+;;         (Op1 (Not) (Op2 (Or) x y))
+;;         (Op2 (And) (Op1 (Not) x) (Op1 (Not) y))
+;;         :ruleset deoptimize
+;;   )

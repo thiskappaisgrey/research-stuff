@@ -3,297 +3,144 @@
 (* top =  1  *)
 (* src = "./top.sv:1.1-19.10" *)
 module top(i_instr, o_out);
-  (* src = "./top.sv:13.9-18.12|./alu.sv:5.22-5.27" *)
-  wire _000_;
-  (* src = "./top.sv:13.9-18.12|./alu.sv:5.22-5.27" *)
-  wire _001_;
-  (* src = "./top.sv:13.9-18.12|./alu.sv:5.22-5.27" *)
-  wire _002_;
-  (* src = "./top.sv:13.9-18.12|./alu.sv:5.22-5.27" *)
-  wire _003_;
-  (* src = "./top.sv:13.9-18.12|./alu.sv:5.22-5.27" *)
-  wire _004_;
+  (* src = "./top.sv:13.9-18.12|./alu.sv:5.17-5.22" *)
+  wire _00_;
   (* src = "./mycells.v:2.7-2.8" *)
-  wire _005_;
+  wire _01_;
   (* src = "./mycells.v:3.8-3.9" *)
-  wire _006_;
-  (* src = "./mycells.v:2.7-2.8" *)
-  wire _007_;
-  (* src = "./mycells.v:3.8-3.9" *)
-  wire _008_;
+  wire _02_;
   (* src = "./mycells.v:12.7-12.8" *)
-  wire _009_;
+  wire _03_;
   (* src = "./mycells.v:12.10-12.11" *)
-  wire _010_;
+  wire _04_;
   (* src = "./mycells.v:13.8-13.9" *)
-  wire _011_;
-  (* src = "./mycells.v:12.7-12.8" *)
-  wire _012_;
-  (* src = "./mycells.v:12.10-12.11" *)
-  wire _013_;
-  (* src = "./mycells.v:13.8-13.9" *)
-  wire _014_;
-  (* src = "./mycells.v:12.7-12.8" *)
-  wire _015_;
-  (* src = "./mycells.v:12.10-12.11" *)
-  wire _016_;
-  (* src = "./mycells.v:13.8-13.9" *)
-  wire _017_;
-  (* src = "./mycells.v:12.7-12.8" *)
-  wire _018_;
-  (* src = "./mycells.v:12.10-12.11" *)
-  wire _019_;
-  (* src = "./mycells.v:13.8-13.9" *)
-  wire _020_;
+  wire _05_;
   (* src = "./mycells.v:24.7-24.8" *)
-  wire _021_;
+  wire _06_;
   (* src = "./mycells.v:24.10-24.11" *)
-  wire _022_;
+  wire _07_;
   (* src = "./mycells.v:25.8-25.9" *)
-  wire _023_;
+  wire _08_;
   (* src = "./mycells.v:2.7-2.8" *)
-  wire _024_;
+  wire _09_;
   (* src = "./mycells.v:3.8-3.9" *)
-  wire _025_;
-  (* src = "./mycells.v:7.7-7.8" *)
-  wire _026_;
-  (* src = "./mycells.v:7.10-7.11" *)
-  wire _027_;
-  (* src = "./mycells.v:9.8-9.9" *)
-  wire _028_;
-  (* src = "./mycells.v:12.7-12.8" *)
-  wire _029_;
-  (* src = "./mycells.v:12.10-12.11" *)
-  wire _030_;
-  (* src = "./mycells.v:13.8-13.9" *)
-  wire _031_;
-  (* src = "./mycells.v:12.7-12.8" *)
-  wire _032_;
-  (* src = "./mycells.v:12.10-12.11" *)
-  wire _033_;
-  (* src = "./mycells.v:13.8-13.9" *)
-  wire _034_;
+  wire _10_;
   (* src = "./top.sv:2.28-2.35" *)
-  wire _035_;
+  wire _11_;
   (* src = "./top.sv:2.28-2.35" *)
-  wire _036_;
+  wire _12_;
   (* src = "./top.sv:2.28-2.35" *)
-  wire _037_;
-  wire _038_;
-  wire _039_;
-  wire _040_;
-  wire _041_;
-  wire _042_;
-  wire _043_;
-  (* unused_bits = "0 1 2 3" *)
-  wire [3:0] _044_;
-  (* unused_bits = "0 1 2 3" *)
-  wire [3:0] _045_;
-  (* unused_bits = "0" *)
-  wire _046_;
+  wire _13_;
+  wire _14_;
+  wire _15_;
+  wire _16_;
   (* src = "./mycells.v:3.12-3.14" *)
-  wire _047_;
-  (* src = "./mycells.v:3.12-3.14" *)
-  wire _048_;
+  wire _17_;
   (* src = "./mycells.v:13.12-13.17" *)
-  wire _049_;
-  (* src = "./mycells.v:13.12-13.17" *)
-  wire _050_;
-  (* src = "./mycells.v:13.12-13.17" *)
-  wire _051_;
-  (* src = "./mycells.v:13.12-13.17" *)
-  wire _052_;
+  wire _18_;
   (* src = "./mycells.v:25.12-25.20" *)
-  wire _053_;
+  wire _19_;
   (* src = "./mycells.v:25.14-25.19" *)
-  wire _054_;
+  wire _20_;
   (* src = "./mycells.v:3.12-3.14" *)
-  wire _055_;
-  (* src = "./mycells.v:9.12-9.17" *)
-  wire _056_;
-  (* src = "./mycells.v:13.12-13.17" *)
-  wire _057_;
-  (* src = "./mycells.v:13.12-13.17" *)
-  wire _058_;
-  wire _059_;
-  wire _060_;
-  wire [1:0] _061_;
-  wire [1:0] _062_;
-  wire [1:0] _063_;
-  wire [1:0] _064_;
-  wire [1:0] _065_;
-  wire [1:0] _066_;
-  wire _067_;
-  wire _068_;
-  wire _069_;
-  wire _070_;
+  wire _21_;
+  wire _22_;
+  wire _23_;
+  wire [1:0] _24_;
+  wire [1:0] _25_;
+  wire _26_;
+  wire _27_;
+  wire _28_;
+  wire _29_;
   (* force_downto = 32'd1 *)
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:571.28-571.29|./alu.sv:9.5-14.12|./alu.sv:0.0-0.0" *)
-  wire [19:0] _071_;
+  wire [3:0] _30_;
   (* force_downto = 32'd1 *)
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:583.28-583.35|./alu.sv:9.5-14.12|./alu.sv:0.0-0.0" *)
-  wire [19:0] _072_;
+  wire [3:0] _31_;
   (* force_downto = 32'd1 *)
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:573.22-573.23|./alu.sv:9.5-14.12|./alu.sv:0.0-0.0" *)
-  wire [3:0] _073_;
+  wire [3:0] _32_;
   (* force_downto = 32'd1 *)
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:578.19-578.22|./alu.sv:9.5-14.12|./alu.sv:0.0-0.0" *)
-  wire [4:0] _074_;
-  (* force_downto = 32'd1 *)
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:274.23-274.25|./alu.sv:10.22-10.31" *)
-  (* unused_bits = "4" *)
-  wire [4:0] _075_;
-  (* force_downto = 32'd1 *)
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:270.23-270.24|./alu.sv:10.22-10.31" *)
-  wire [4:0] _076_;
+  wire _33_;
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:597.13-597.15|./alu.sv:9.5-14.12|./alu.sv:0.0-0.0" *)
-  wire _077_;
+  wire _34_;
   (* force_downto = 32'd1 *)
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:279.21-279.23|./alu.sv:11.22-11.31" *)
-  wire [4:0] _078_;
-  (* force_downto = 32'd1 *)
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:274.23-274.25|./alu.sv:11.22-11.31" *)
-  (* unused_bits = "4" *)
-  wire [4:0] _079_;
+  wire _35_;
   (* force_downto = 32'd1 *)
   (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:270.23-270.24|./alu.sv:11.22-11.31" *)
-  wire [4:0] _080_;
-  (* force_downto = 32'd1 *)
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:214.23-214.24|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  (* unused_bits = "4" *)
-  wire [4:0] _081_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.19-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:10.22-10.31" *)
-  wire _082_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.19-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:10.22-10.31" *)
-  wire _083_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.19-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:10.22-10.31" *)
-  wire _084_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:241.12-241.34|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:10.22-10.31" *)
-  wire _085_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:248.19-248.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:10.22-10.31" *)
-  wire _086_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.12-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:10.22-10.31" *)
-  wire _087_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.19-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  wire _088_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.19-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  wire _089_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.19-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  wire _090_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:241.12-241.34|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  wire _091_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:248.19-248.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  wire _092_;
-  (* src = "./top.sv:13.9-18.12|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:240.12-240.41|/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:286.27-286.69|./alu.sv:11.22-11.31" *)
-  wire _093_;
+  wire _36_;
   (* hdlname = "alu i_a" *)
-  (* src = "./top.sv:13.9-18.12|./alu.sv:2.21-2.24" *)
-  wire [4:0] \alu.i_a ;
+  (* src = "./top.sv:13.9-18.12|./alu.sv:2.15-2.18" *)
+  wire \alu.i_a ;
   (* hdlname = "alu i_b" *)
-  (* src = "./top.sv:13.9-18.12|./alu.sv:3.21-3.24" *)
-  wire [4:0] \alu.i_b ;
+  (* src = "./top.sv:13.9-18.12|./alu.sv:3.15-3.18" *)
+  wire \alu.i_b ;
   (* hdlname = "alu i_control" *)
   (* src = "./top.sv:13.9-18.12|./alu.sv:4.21-4.30" *)
   wire [1:0] \alu.i_control ;
   (* hdlname = "alu o_res" *)
-  (* src = "./top.sv:13.9-18.12|./alu.sv:5.22-5.27" *)
-  wire [4:0] \alu.o_res ;
+  (* src = "./top.sv:13.9-18.12|./alu.sv:5.17-5.22" *)
+  wire \alu.o_res ;
   (* hdlname = "decoder i_instr" *)
-  (* src = "./top.sv:8.13-12.12|./decoder.sv:3.22-3.29" *)
-  wire [11:0] \decoder.i_instr ;
+  (* src = "./top.sv:8.13-12.12|./decoder.sv:3.21-3.28" *)
+  wire [3:0] \decoder.i_instr ;
   (* hdlname = "decoder o_a" *)
-  (* src = "./top.sv:8.13-12.12|./decoder.sv:5.22-5.25" *)
-  wire [4:0] \decoder.o_a ;
+  (* src = "./top.sv:8.13-12.12|./decoder.sv:5.17-5.20" *)
+  wire \decoder.o_a ;
   (* hdlname = "decoder o_b" *)
-  (* src = "./top.sv:8.13-12.12|./decoder.sv:6.22-6.25" *)
-  wire [4:0] \decoder.o_b ;
+  (* src = "./top.sv:8.13-12.12|./decoder.sv:6.17-6.20" *)
+  wire \decoder.o_b ;
   (* hdlname = "decoder o_op" *)
   (* src = "./top.sv:8.13-12.12|./decoder.sv:4.22-4.26" *)
   wire [1:0] \decoder.o_op ;
   (* src = "./top.sv:2.28-2.35" *)
   input [11:0] i_instr;
   wire [11:0] i_instr;
-  (* src = "./top.sv:6.10-6.13" *)
+  (* src = "./top.sv:6.12-6.15" *)
   wire o_a;
-  (* src = "./top.sv:7.10-7.13" *)
+  (* src = "./top.sv:7.12-7.15" *)
   wire o_b;
-  (* src = "./top.sv:5.10-5.14" *)
-  wire o_op;
+  (* src = "./top.sv:5.17-5.21" *)
+  wire [1:0] o_op;
   (* src = "./top.sv:3.28-3.33" *)
   output [4:0] o_out;
   wire [4:0] o_out;
-  assign _047_ = ~ (* src = "./mycells.v:3.12-3.14" *) _005_;
-  assign _048_ = ~ (* src = "./mycells.v:3.12-3.14" *) _007_;
-  assign _049_ = _009_ & (* src = "./mycells.v:13.12-13.17" *) _010_;
-  assign _050_ = _012_ & (* src = "./mycells.v:13.12-13.17" *) _013_;
-  assign _051_ = _015_ & (* src = "./mycells.v:13.12-13.17" *) _016_;
-  assign _052_ = _018_ & (* src = "./mycells.v:13.12-13.17" *) _019_;
-  assign _053_ = ~ (* src = "./mycells.v:25.12-25.20" *) _054_;
-  assign _054_ = _021_ | (* src = "./mycells.v:25.14-25.19" *) _022_;
-  assign _055_ = ~ (* src = "./mycells.v:3.12-3.14" *) _024_;
-  assign _056_ = _026_ ^ (* src = "./mycells.v:9.12-9.17" *) _027_;
-  assign _057_ = _029_ & (* src = "./mycells.v:13.12-13.17" *) _030_;
-  assign _058_ = _032_ & (* src = "./mycells.v:13.12-13.17" *) _033_;
-  assign \decoder.o_a  = \decoder.i_instr [6:2];
-  assign \decoder.o_b  = \decoder.i_instr [11:7];
+  assign _17_ = ~ (* src = "./mycells.v:3.12-3.14" *) _01_;
+  assign _18_ = _03_ & (* src = "./mycells.v:13.12-13.17" *) _04_;
+  assign _19_ = ~ (* src = "./mycells.v:25.12-25.20" *) _20_;
+  assign _20_ = _06_ | (* src = "./mycells.v:25.14-25.19" *) _07_;
+  assign _21_ = ~ (* src = "./mycells.v:3.12-3.14" *) _09_;
+  assign o_out[4:1] = 4'h0;
+  assign \decoder.o_a  = \decoder.i_instr [1];
+  assign \decoder.o_b  = \decoder.i_instr [2];
   assign \decoder.o_op  = \decoder.i_instr [1:0];
-  assign \decoder.i_instr  = i_instr;
-  assign { _045_, o_a } = \decoder.o_a ;
-  assign { _044_, o_b } = \decoder.o_b ;
-  assign { _046_, o_op } = \decoder.o_op ;
-  assign _075_[0] = _071_[0];
-  assign _076_[0] = _071_[15];
-  assign \alu.i_a  = { 4'h0, o_a };
-  assign \alu.i_b  = { 4'h0, o_b };
-  assign \alu.i_control  = { 1'h0, o_op };
-  assign o_out = \alu.o_res ;
-  assign _036_ = i_instr[2];
-  assign _037_ = i_instr[7];
-  assign \alu.o_res [4] = _004_;
-  assign \alu.o_res [3] = _003_;
-  assign \alu.o_res [2] = _002_;
-  assign \alu.o_res [1] = _001_;
-  assign \alu.o_res [0] = _000_;
-  assign _035_ = i_instr[0];
-  assign _034_ = _058_;
-  assign _032_ = _043_;
-  assign _033_ = _039_;
-  assign _002_ = _034_;
-  assign _031_ = _057_;
-  assign _029_ = _043_;
-  assign _030_ = _039_;
-  assign _003_ = _031_;
-  assign _028_ = _056_;
-  assign _026_ = _036_;
-  assign _027_ = _037_;
-  assign _000_ = _028_;
-  assign _025_ = _055_;
-  assign _024_ = _042_;
-  assign _001_ = _025_;
-  assign _023_ = _053_;
-  assign _021_ = _004_;
-  assign _022_ = _041_;
-  assign _042_ = _023_;
-  assign _020_ = _052_;
-  assign _018_ = _038_;
-  assign _019_ = _040_;
-  assign _041_ = _020_;
-  assign _017_ = _051_;
-  assign _015_ = _036_;
-  assign _016_ = _037_;
-  assign _040_ = _017_;
-  assign _014_ = _050_;
-  assign _012_ = _043_;
-  assign _013_ = _039_;
-  assign _004_ = _014_;
-  assign _011_ = _049_;
-  assign _009_ = _037_;
-  assign _010_ = _035_;
-  assign _039_ = _011_;
-  assign _008_ = _048_;
-  assign _007_ = _035_;
-  assign _038_ = _008_;
-  assign _006_ = _047_;
-  assign _005_ = _036_;
-  assign _043_ = _006_;
+  assign \decoder.i_instr  = i_instr[3:0];
+  assign o_a = \decoder.o_a ;
+  assign o_b = \decoder.o_b ;
+  assign o_op = \decoder.o_op ;
+  assign \alu.i_a  = o_a;
+  assign \alu.i_b  = o_b;
+  assign \alu.i_control  = o_op;
+  assign o_out[0] = \alu.o_res ;
+  assign _12_ = i_instr[1];
+  assign _13_ = i_instr[2];
+  assign \alu.o_res  = _00_;
+  assign _11_ = i_instr[0];
+  assign _10_ = _21_;
+  assign _09_ = _16_;
+  assign _00_ = _10_;
+  assign _08_ = _19_;
+  assign _06_ = _13_;
+  assign _07_ = _15_;
+  assign _16_ = _08_;
+  assign _05_ = _18_;
+  assign _03_ = _12_;
+  assign _04_ = _14_;
+  assign _15_ = _05_;
+  assign _02_ = _17_;
+  assign _01_ = _11_;
+  assign _14_ = _02_;
 endmodule

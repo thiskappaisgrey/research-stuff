@@ -1,151 +1,115 @@
 ; wire declarations
 ; i_instr
-(let v0 (Wire "v0" 12))
-(let v1 (Op1 (Extract 0 0) v0))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$403.$not$./yosys_lib/mycells.v:3$412_Y
-(let v2 (Wire "v2" 1))
-(let v3 (Op1 (Extract 2 2) v0))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$404.$not$./yosys_lib/mycells.v:3$412_Y
+(let v0 (Wire "v0" 4))
+(let v1 (Op1 (Extract 3 3) v0))
+(let v2 (Op1 (Extract 0 0) v0))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$157.$not$./mycells.v:25$172_Y
+(let v3 (Wire "v3" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$157.$or$./mycells.v:25$171_Y
 (let v4 (Wire "v4" 1))
-(let v5 (Op1 (Extract 7 7) v0))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$405.$and$./yosys_lib/mycells.v:13$414_Y
-(let v6 (Wire "v6" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$158.$xor$./mycells.v:9$167_Y
+(let v5 (Wire "v5" 1))
+(let v6 (Op1 (Extract 2 2) v0))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$159.$not$./mycells.v:25$172_Y
 (let v7 (Wire "v7" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$407.$and$./yosys_lib/mycells.v:13$414_Y
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$159.$or$./mycells.v:25$171_Y
 (let v8 (Wire "v8" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$408.$and$./yosys_lib/mycells.v:13$414_Y
-(let v9 (Wire "v9" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$409.$not$./yosys_lib/mycells.v:25$418_Y
+(let v9 (Op1 (Extract 1 1) v0))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$160.$and$./mycells.v:13$168_Y
 (let v10 (Wire "v10" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$409.$or$./yosys_lib/mycells.v:25$417_Y
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$161.$not$./mycells.v:3$166_Y
 (let v11 (Wire "v11" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$410.$not$./yosys_lib/mycells.v:3$412_Y
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$162.$not$./mycells.v:25$172_Y
 (let v12 (Wire "v12" 1))
-; $flatten$abc$402$auto$blifparse.cc:386:parse_blif$411.$xor$./yosys_lib/mycells.v:9$413_Y
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$162.$or$./mycells.v:25$171_Y
 (let v13 (Wire "v13" 1))
-; { 3'000 $flatten\alu.$procmux$9.B [16:14] $flatten\alu.$procmux$9.B [14] $flatten\alu.$procmux$9.B [14] $flatten\alu.$procmux$9.B [14] $flatten\alu.$procmux$9.B [10] 4'0000 $flatten\alu.$procmux$9.B [5] 4'0000 $flatten\alu.$procmux$9.B [16] }
-; $flatten\alu.$procmux$9.B
-(let v14 (Wire "v14" 20))
-(let v15 (Op1 (Extract 16 16) v14))
-; 4'0000
-(let v16 (Op0 (BV 0 4)))
-(let v17 (Op1 (Extract 5 5) v14))
-(let v18 (Op1 (Extract 10 10) v14))
-(let v19 (Op1 (Extract 14 14) v14))
-(let v20 (Op1 (Extract 16 14) v14))
-; 3'000
-(let v21 (Op0 (BV 0 3)))
-(let v22 (Op2 (Concat) v15 v16))
-(let v23 (Op2 (Concat) v22 v17))
-(let v24 (Op2 (Concat) v23 v16))
-(let v25 (Op2 (Concat) v24 v18))
-(let v26 (Op2 (Concat) v25 v19))
-(let v27 (Op2 (Concat) v26 v19))
-(let v28 (Op2 (Concat) v27 v19))
-(let v29 (Op2 (Concat) v28 v20))
-(let v30 (Op2 (Concat) v29 v21))
-; { 3'000 $flatten\alu.$procmux$9.B_AND_S [16:15] $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten\alu.$procmux$9.B_AND_S [10] 10'0000000000 }
-; 10'0000000000
-(let v31 (Op0 (BV 0 10)))
-; $flatten\alu.$procmux$9.B_AND_S
-(let v32 (Wire "v32" 20))
-(let v33 (Op1 (Extract 10 10) v32))
-(let v34 (Op1 (Extract 16 15) v32))
-(let v35 (Op2 (Concat) v31 v33))
-(let v36 (Op2 (Concat) v35 v7))
-(let v37 (Op2 (Concat) v36 v7))
-(let v38 (Op2 (Concat) v37 v7))
-(let v39 (Op2 (Concat) v38 v7))
-(let v40 (Op2 (Concat) v39 v34))
-(let v41 (Op2 (Concat) v40 v21))
-; { $flatten\alu.$procmux$9.S [3] \i_instr [0] 2'00 }
-; 2'00
-(let v42 (Op0 (BV 0 2)))
-; $flatten\alu.$procmux$9.S
-(let v43 (Wire "v43" 4))
-(let v44 (Op1 (Extract 3 3) v43))
-(let v45 (Op2 (Concat) v42 v1))
-(let v46 (Op2 (Concat) v45 v44))
-; { 4'1111 $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.BB [0] }
-; $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.BB
-(let v47 (Wire "v47" 5))
-(let v48 (Op1 (Extract 0 0) v47))
-; 4'1111
-(let v49 (Op0 (BV 15 4)))
-(let v50 (Op2 (Concat) v48 v49))
-; { $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.CO [4:3] $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.CO [3] $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.CO [3] $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.CO [3] }
-; $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.CO
-(let v51 (Wire "v51" 5))
-(let v52 (Op1 (Extract 3 3) v51))
-(let v53 (Op1 (Extract 4 3) v51))
-(let v54 (Op2 (Concat) v52 v52))
-(let v55 (Op2 (Concat) v54 v52))
-(let v56 (Op2 (Concat) v55 v53))
-; { 4'1111 $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.X [0] }
-; $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.X
-(let v57 (Wire "v57" 5))
-(let v58 (Op1 (Extract 0 0) v57))
-(let v59 (Op2 (Concat) v58 v49))
-; { $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.lcu.G [4] 3'000 $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.lcu.G [0] }
-; $flatten\alu.$techmap$sub$./tests/experiments/alu.sv:11$3.$auto$alumacc.cc:485:replace_alu$94.lcu.G
-(let v60 (Wire "v60" 5))
-(let v61 (Op1 (Extract 0 0) v60))
-(let v62 (Op1 (Extract 4 4) v60))
-(let v63 (Op2 (Concat) v61 v21))
-(let v64 (Op2 (Concat) v63 v62))
-; { 4'0000 \i_instr [2] }
-(let v65 (Op2 (Concat) v3 v16))
-; { 4'0000 \i_instr [7] }
-(let v66 (Op2 (Concat) v5 v16))
-; { 1'0 \i_instr [0] }
-; 1'0
-(let v67 (Op0 (BV 0 1)))
-(let v68 (Op2 (Concat) v1 v67))
-; { $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$406.$and$./yosys_lib/mycells.v:13$414_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$410.$not$./yosys_lib/mycells.v:3$412_Y $flatten$abc$402$auto$blifparse.cc:386:parse_blif$411.$xor$./yosys_lib/mycells.v:9$413_Y }
-(let v69 (Op2 (Concat) v13 v12))
-(let v70 (Op2 (Concat) v69 v7))
-(let v71 (Op2 (Concat) v70 v7))
-(let v72 (Op2 (Concat) v71 v7))
-(let v73 (Op1 (Extract 6 2) v0))
-(let v74 (Op1 (Extract 11 7) v0))
-(let v75 (Op1 (Extract 1 0) v0))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$163.$not$./mycells.v:25$172_Y
+(let v14 (Wire "v14" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$163.$or$./mycells.v:25$171_Y
+(let v15 (Wire "v15" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$164.$and$./mycells.v:13$168_Y
+(let v16 (Wire "v16" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$165.$not$./mycells.v:25$172_Y
+(let v17 (Wire "v17" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$165.$or$./mycells.v:25$171_Y
+(let v18 (Wire "v18" 1))
+(let v19 (Op1 (Extract 1 0) v0))
+; $flatten\alu.$techmap$procmux$7.$reduce_or$/home/thanawat/projects/share/research-proj/lakeroad-yosys/share/techmap.v:597$103_Y
+(let v20 (Wire "v20" 1))
+; $flatten\alu.$procmux$7.Y_B
+(let v21 (Wire "v21" 1))
+; $flatten\alu.$procmux$7.S
+(let v22 (Wire "v22" 4))
+; $flatten\alu.$procmux$7.B_AND_S
+(let v23 (Wire "v23" 4))
+; $flatten\alu.$procmux$7.B
+(let v24 (Wire "v24" 4))
+; $flatten\alu.$auto$simplemap.cc:246:simplemap_eqne$97
+(let v25 (Wire "v25" 1))
+; $flatten\alu.$auto$simplemap.cc:246:simplemap_eqne$124
+(let v26 (Wire "v26" 1))
+; $flatten\alu.$auto$simplemap.cc:246:simplemap_eqne$114
+(let v27 (Wire "v27" 1))
+; $flatten\alu.$auto$simplemap.cc:158:logic_reduce$130
+(let v28 (Wire "v28" 1))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$143
+(let v29 (Wire "v29" 2))
+; $flatten\alu.$auto$simplemap.cc:117:simplemap_reduce$133
+(let v30 (Wire "v30" 2))
+; $flatten\alu.$auto$rtlil.cc:2660:NotGate$151
+(let v31 (Wire "v31" 1))
+; $flatten\alu.$auto$rtlil.cc:2660:NotGate$149
+(let v32 (Wire "v32" 1))
 
 ; cells
-(union v10 (Op1 (Not) v11))
-(union v2 (Op1 (Not) v1))
-(union v4 (Op1 (Not) v3))
-(union v6 (Op2 (And) v1 v5))
-(union v7 (Op2 (And) v4 v6))
-(union v8 (Op2 (And) v5 v3))
-(union v9 (Op2 (And) v2 v8))
-(union v11 (Op2 (Or) v7 v9))
-(union v12 (Op1 (Not) v10))
-(union v13 (Op2 (Xor) v5 v3))
+(union v3 (Op1 (Not) v4))
+(union v7 (Op1 (Not) v8))
+(union v12 (Op1 (Not) v13))
+(union v14 (Op1 (Not) v15))
+(union v17 (Op1 (Not) v18))
+(union v4 (Op2 (Or) v1 v2))
+(union v5 (Op2 (Xor) v1 v2))
+(union v8 (Op2 (Or) v6 v5))
+(union v10 (Op2 (And) v1 v9))
+(union v11 (Op1 (Not) v10))
+(union v13 (Op2 (Or) v6 v9))
+(union v15 (Op2 (Or) v3 v12))
+(union v16 (Op2 (And) v11 v14))
+(union v18 (Op2 (Or) v7 v16))
 
 ; inputs
-(let i_instr (Var "i_instr" 12))
+(let i_instr (Var "i_instr" 4))
 (union v0 i_instr)
 
 ; outputs
-(let o_out v72)
+(let o_out v17)
 
 ; delete wire expressions
-(delete (Wire "v0" 12))
-(delete (Wire "v2" 1))
+(delete (Wire "v0" 4))
+(delete (Wire "v3" 1))
 (delete (Wire "v4" 1))
-(delete (Wire "v6" 1))
+(delete (Wire "v5" 1))
 (delete (Wire "v7" 1))
 (delete (Wire "v8" 1))
-(delete (Wire "v9" 1))
 (delete (Wire "v10" 1))
 (delete (Wire "v11" 1))
 (delete (Wire "v12" 1))
 (delete (Wire "v13" 1))
-(delete (Wire "v14" 20))
-(delete (Wire "v32" 20))
-(delete (Wire "v43" 4))
-(delete (Wire "v47" 5))
-(delete (Wire "v51" 5))
-(delete (Wire "v57" 5))
-(delete (Wire "v60" 5))
+(delete (Wire "v14" 1))
+(delete (Wire "v15" 1))
+(delete (Wire "v16" 1))
+(delete (Wire "v17" 1))
+(delete (Wire "v18" 1))
+(delete (Wire "v20" 1))
+(delete (Wire "v21" 1))
+(delete (Wire "v22" 4))
+(delete (Wire "v23" 4))
+(delete (Wire "v24" 4))
+(delete (Wire "v25" 1))
+(delete (Wire "v26" 1))
+(delete (Wire "v27" 1))
+(delete (Wire "v28" 1))
+(delete (Wire "v29" 2))
+(delete (Wire "v30" 2))
+(delete (Wire "v31" 1))
+(delete (Wire "v32" 1))

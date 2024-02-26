@@ -20,7 +20,7 @@
   
   ; (Op1 (Extract high low) expr)
   ; Extraction from a bitvector.
-  (Extract i64 i64)
+  (Extract i64 i64 :cost 1)
 
   ; (Op2 (Concat) top-expr bottom-expr)
   ; Concatenation of two bitvectors.
@@ -35,10 +35,11 @@
   ; (Op1 (ZeroExtend bitwidth) expr)
   (ZeroExtend i64)
   )
-  (function Var (String i64) Expr)
-  (function Op0 (Op) Expr)
-  (function Op1 (Op Expr) Expr)
-  (function Op2 (Op Expr Expr) Expr)
-  (function Op3 (Op Expr Expr Expr) Expr)
-  (function Wire (String i64) Expr)
+  (function Var (String i64) Expr :cost 5)
+  (function Op0 (Op) Expr :cost 5)
+  (function Op1 (Op Expr) Expr :cost 3)
+  (function Op2 (Op Expr Expr) Expr :cost 5)
+  (function Op3 (Op Expr Expr Expr) Expr :cost 5)
+  (function Project (i64 Expr) Expr :cost 0)
+  (function Wire (String i64) Expr :cost 5)
   ;; (function apply (Module ExprVec) Expr)
