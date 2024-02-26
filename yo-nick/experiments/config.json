@@ -1,0 +1,12 @@
+{
+  "outdir": "./out",
+  "sources": [
+    {
+      "source": [
+        "./alu.sv"
+      ],
+      "yosys_script": "\nread_verilog -sv ./alu.sv;\nprep -top alu;\nhierarchy -check -top alu;\ntechmap; opt; dfflibmap -liberty mycells.lib;\nabc -liberty mycells.lib;\nread_verilog mycells.v;\n\nflatten; opt\nflatten; opt\n\nwrite_verilog out/synth.v\nwrite_lakeroad out/alu.egg\n"
+    }
+  ],
+  "yosys_path": "/home/thanawat/projects/share/research-proj/lakeroad-yosys/yosys"
+}

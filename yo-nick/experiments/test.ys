@@ -1,0 +1,15 @@
+read_verilog -sv ./decoder.sv
+# read_verilog -sv ./alu.sv
+# read_verilog -sv ./top.sv
+#
+prep -top decoder;
+hierarchy -check -top decoder;
+
+dfflibmap -liberty ./mycells.lib
+techmap;  opt;
+flatten;
+abc -liberty mycells.lib
+read_verilog ./mycells.v;
+flatten
+# write_verilog synth.v
+write_lakeroad decoder.egg

@@ -1,0 +1,83 @@
+; wire declarations
+; $abc$156$auto$blifparse.cc:386:parse_blif$157.Y
+(let v0 (Wire "v0" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$158.Y
+(let v1 (Wire "v1" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$159.Y
+(let v2 (Wire "v2" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$160.Y
+(let v3 (Wire "v3" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$161.Y
+(let v4 (Wire "v4" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$162.Y
+(let v5 (Wire "v5" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$163.Y
+(let v6 (Wire "v6" 1))
+; $abc$156$auto$blifparse.cc:386:parse_blif$164.Y
+(let v7 (Wire "v7" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$157.$or$mycells.v:25$171_Y
+(let v8 (Wire "v8" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$159.$or$mycells.v:25$171_Y
+(let v9 (Wire "v9" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$162.$or$mycells.v:25$171_Y
+(let v10 (Wire "v10" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$163.$or$mycells.v:25$171_Y
+(let v11 (Wire "v11" 1))
+; $flatten$abc$156$auto$blifparse.cc:386:parse_blif$165.$or$mycells.v:25$171_Y
+(let v12 (Wire "v12" 1))
+; i_a
+(let v13 (Wire "v13" 1))
+; i_b
+(let v14 (Wire "v14" 1))
+; i_control
+(let v15 (Wire "v15" 2))
+; o_res
+(let v16 (Wire "v16" 1))
+
+; cells
+(union v0 (Op1 (Not) v8))
+(let v17 (Op1 (Extract 0 0) v15))
+(union v8 (Op2 (Or) v17 v13))
+(union v1 (Op2 (Xor) v17 v13))
+(union v2 (Op1 (Not) v9))
+(union v9 (Op2 (Or) v14 v1))
+(let v18 (Op1 (Extract 1 1) v15))
+(union v3 (Op2 (And) v18 v13))
+(union v4 (Op1 (Not) v3))
+(union v5 (Op1 (Not) v10))
+(union v10 (Op2 (Or) v18 v14))
+(union v6 (Op1 (Not) v11))
+(union v11 (Op2 (Or) v0 v5))
+(union v7 (Op2 (And) v4 v6))
+(union v16 (Op1 (Not) v12))
+(union v12 (Op2 (Or) v2 v7))
+
+; inputs
+(let i_a (Var "i_a" 1))
+(union v13 i_a)
+(let i_b (Var "i_b" 1))
+(union v14 i_b)
+(let i_control (Var "i_control" 2))
+(union v15 i_control)
+
+; outputs
+(let o_res v16)
+
+; delete wire expressions
+(delete (Wire "v0" 1))
+(delete (Wire "v1" 1))
+(delete (Wire "v2" 1))
+(delete (Wire "v3" 1))
+(delete (Wire "v4" 1))
+(delete (Wire "v5" 1))
+(delete (Wire "v6" 1))
+(delete (Wire "v7" 1))
+(delete (Wire "v8" 1))
+(delete (Wire "v9" 1))
+(delete (Wire "v10" 1))
+(delete (Wire "v11" 1))
+(delete (Wire "v12" 1))
+(delete (Wire "v13" 1))
+(delete (Wire "v14" 1))
+(delete (Wire "v15" 2))
+(delete (Wire "v16" 1))
